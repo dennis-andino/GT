@@ -1,0 +1,87 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: #456;
+    font-family: "Open Sans", sans-serif
+}
+
+.alineacion {
+    display: flex;
+    float: left;
+    width: 100vw;
+    height: 100vh;
+    align-items: center
+}
+
+.login {
+    width: 500px;
+    margin: 16px auto;
+    font-size: 16px
+}
+
+.login-header, .login p {
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+.login-header {
+    background: #111B54;
+    padding: 18px;
+    font-size: 1.4em;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff
+}
+
+.login-container {
+    background: #e0f1ff;
+    padding: 10px
+}
+
+.login p {
+    padding: 5px
+}
+
+.login input[type="submit"] {
+    background: #111B54;
+    border-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    padding: 12px;
+    outline: 0;
+    font-family: inherit;
+    font-size: .90em
+}
+
+.login input[type="submit"]:hover {
+    background: #17c
+}
+
+.login input[type="submit"]:focus {
+    border-color: #05a
+}
+
+label {
+    color: #9A9393;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 3px;
+    outline: 0
+}
+
+label a {
+    color: #1e9abd;
+    text-decoration: none;
+    transition: 200ms ease-in-out
+}
+
+label a:hover {
+    color: #000
+}
