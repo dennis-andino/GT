@@ -47,51 +47,58 @@ class tutorialsController
 
     public function save()
     {
-        if (isset($_POST['subject']) && isset($_POST['details'])) {
-            $requestdate = date('Y-m-d g:ia');
-            $new_tutoria = new Tutorials();
-            $new_tutoria->setSchedule((int)$_POST["horario"]);
-            $new_tutoria->setPetitioner((int)$_POST["petitioner"]);
-            $new_tutoria->setSubject($_POST["subject"]);
-            $new_tutoria->setDetails($_POST["details"]);
-            $new_tutoria->setReservdate($_POST["reservdate"]);
-            $new_tutoria->setModality((int)$_POST["modality"]);
-            $new_tutoria->setRequestdate($requestdate);
-            $exist = $new_tutoria->exists();
-            if ($exist && mysqli_num_rows($exist) > 0) {
-                $_SESSION['alert'] = array("title" => "Horario no disponible", "msj" => "Upps , El horario solicitado ya esta reservado, elige un horario diferente !", "type" => "error");
-            } else {
-                if ($new_tutoria->save()) {
-                    try {
-                        if (count($_FILES) > 0) {
-                            $file = $_FILES['filename']; //tratamiento de archivos
-                            $filename = $file['name'];
-                            $mimetype = $file['type'];
-                            $new_tutoria->setFilename($filename);
-                            if ($mimetype == "application/pdf" || $mimetype == "application/msword" || $mimetype == "image/jpeg" || $mimetype == "image/png" || $mimetype == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
-                                if (!is_dir('uploads/documents')) {
-                                    mkdir('uploads/documents', 0777, true);
-                                }
-                                if (!move_uploaded_file($file['tmp_name'], 'uploads/documents/' . $filename)) {
-                                    $new_tutoria->correctFileName();
-                                }
-                                //fin
-                            } else {
-                                $_SESSION['alert'] = array("title" => "Solicitud recibida", "msj" => "La solicitud se recibio satisfactoriamente , sin embargo ,el adjunto no fue admitido.", "type" => "warning");
-                            }
-                        }
-                        if (!isset($_SESSION['alert'])) {
-                            $_SESSION['alert'] = array("title" => "Solicitud recibida", "msj" => " La solicitud de tutoria fue recibida, en los proximos dias notificaremos de su aprobacion.", "type" => "success");
-                        }
-                    } catch (Exception $e) {
-                        $_SESSION['alert'] = array("title" => "Solicitud recibida", "msj" => "La solicitud se recibio satisfactoriamente , sin embargo , experimentamos problemas al almacenar el archivo adjunto", "type" => "warning");
-                    }
+        try{
+            if (isset($_POST['subject']) && isset($_POST['details'])) {
+                $requestdate = date('Y-m-d g:ia');
+                $new_tutoria = new Tutorials();
+                $new_tutoria->setSchedule((int)$_POST["horario"]);
+                $new_tutoria->setPetitioner((int)$_POST["petitioner"]);
+                $new_tutoria->setSubject($_POST["subject"]);
+                $new_tutoria->setDetails($_POST["details"]);
+                $new_tutoria->setReservdate($_POST["reservdate"]);
+                $new_tutoria->setModality((int)$_POST["modality"]);
+                $new_tutoria->setRequestdate($requestdate);
+                $new_tutoria->setFilename($_FILES['filename']['name']);
+                $exist = $new_tutoria->exists();
+                if ($exist && mysqli_num_rows($exist) > 0) {
+                    $_SESSION['alert'] = array("title" => "Horario no disponible", "msj" => "Upps , El horario solicitado ya esta reservado, elige un horario diferente !", "type" => "error");
                 } else {
-                    $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al procesar la solicitud, intentalo de nuevo !", "type" => "error");
+                    if ($new_tutoria->save()) { //tratamiento de archivos
+                        try {
+                            if ($_FILES['filename']['name'] != null) {
+                                $file = $_FILES['filename'];
+                                $filename = $file['name'];
+                                $mimetype = $file['type'];
+                                if ($mimetype == "application/pdf" || $mimetype == "application/msword" || $mimetype == "image/jpeg" || $mimetype == "image/png" || $mimetype == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+                                    if (!is_dir('uploads/documents')) {
+                                        mkdir('uploads/documents', 0777, true);
+                                    }
+                                    if (!(move_uploaded_file($file['tmp_name'], 'uploads/documents/' . $filename))) {
+                                        $new_tutoria->correctFileName();
+                                    }
+
+                                } else {
+                                    $_SESSION['alert'] = array("title" => "Solicitud recibida", "msj" => "La solicitud se recibio satisfactoriamente , sin embargo ,el adjunto no fue admitido.", "type" => "warning");
+                                }
+                            }
+                            if (!isset($_SESSION['alert'])) {
+                                $_SESSION['alert'] = array("title" => "Solicitud recibida", "msj" => " La solicitud de tutoria fue recibida, en los proximos dias notificaremos de su aprobacion.", "type" => "success");
+                            }
+                        } catch (Exception $e) {
+                            $_SESSION['alert'] = array("title" => "Solicitud recibida", "msj" => "La solicitud se recibio satisfactoriamente , sin embargo , experimentamos problemas al almacenar el archivo adjunto", "type" => "warning");
+                        }
+                    } else {
+                        $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al procesar la solicitud, intentalo de nuevo !", "type" => "error");
+                    }
                 }
             }
+        }catch (Exception $e){
+            $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al procesar la solicitud, intentalo de nuevo !", "type" => "error");
+        } finally {
+            header('Location:'.base_url.'home/student');
         }
-        homeController::student();
+
+
     }
 
     public function getinfo()
@@ -111,7 +118,7 @@ class tutorialsController
                     $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al obtener la informacion, intentalo de nuevo !", "type" => "error");
                 }
                 if ($_SESSION['baseon'] == 'Tutor') {
-                    homeController::tutor();
+                    header('Location:'.base_url.'home/tutor');
                 } elseif ($_SESSION['baseon'] == 'Coordinator') {
                     if (($_SESSION['tutoria']->status == -1 || $_SESSION['tutoria']->status == 1) && !isset($_SESSION['asignatures'])) {
                         require_once 'models/Courses.php';
@@ -123,7 +130,7 @@ class tutorialsController
                             $_SESSION['sections'] = $sectionObject->getAllEnables()->fetch_all(MYSQLI_ASSOC);
                         }
                     }
-                    homeController::coordinator();
+                    header('Location:'.base_url.'home/coordinator');
                 } else {
                     $this->logout();
                 }
@@ -176,12 +183,12 @@ class tutorialsController
                 $tutoria->setApprovedby((int)$_POST['coordinator']);
                 $tutoria->setSpace($_POST['section']); //seccion, aula virtual o cancelacion
                 if ($_POST['action'] == 1) {
-                    $tutoria->setStatus(1);
+                    $tutoria->setStatus(1);//aprobacion
                 } else {
-                    $tutoria->setStatus(3);
+                    $tutoria->setStatus(3);//cancelacion
                 }
                 $answerserver = $tutoria->approve()->fetch_object();
-                if ($answerserver->result == 0) {// la aprobacion tuvo exito
+                if ($answerserver->result == '0') {// la aprobacion tuvo exito
                     if ($_POST['action'] == 1) {
                         $_SESSION['alert'] = array("title" => "Solicitud aprobada", "msj" => "Se ha aprobado la solicitud satisfactoriamente.", "type" => "success");
                     } else {

@@ -67,7 +67,7 @@ class Utils
      }
  }
 
- public static function view($user=null){
+ public static function view(){
      if ($_SESSION['baseon'] == 'Tutor') {
          require_once 'views/Tutor/homeTutor.php';
      } else if ($_SESSION['baseon'] == 'Coordinator') {

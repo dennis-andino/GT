@@ -23,7 +23,7 @@ class Tutorials
         $this->finishtime = "";
         $this->stucomment = "";
         $this->tutcomment = "";
-        $this->modality=1;
+        $this->modality=0;
         $this->space="No definido";
         $this->connection = database::connect();
 
@@ -147,7 +147,9 @@ class Tutorials
 
     public function setFilename(string $filename): void
     {
-        $this->filename = trim($filename);
+        if(!empty($filename)){
+            $this->filename = trim($filename);
+        }
     }
 
 

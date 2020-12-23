@@ -84,7 +84,7 @@
                                         <label for="filename">Adjuntar archivo (.JPG .PNG .PDF o .DOC)(opcional)</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" id="filename" name="filename" accept="application/pdf, .doc, .docx,image/png, .jpeg, .jpg">
+                                                <input type="file" id="filename" name="filename" accept="application/pdf, .doc, .docx ,image/png, .jpeg, .jpg">
                                             </div>
                                         </div>
                                     </div>

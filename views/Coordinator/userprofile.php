@@ -74,7 +74,7 @@
                                 <td><?=$user->availability==1?'Activo':'Inhabilitado'?></td>
                             </tr>
                             <tr>
-                                <th scope="row">Observacioes:</th>
+                                <th scope="row">Observaciones:</th>
                                 <td colspan="4"><?=$user->observations?></td>
                             </tr>
                             </tbody>

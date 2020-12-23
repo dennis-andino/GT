@@ -299,7 +299,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="<?=base_url . 'tutorials/approve'?>?>" method="POST">
+                        <form action="<?=base_url . 'tutorials/approve'?>" method="POST">
                             <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $_SESSION['tutoria']->id ?>">
                             <input type="hidden" id="coordinator" name="coordinator" value="<?=$_SESSION['id']?>">
                             <input type="hidden" id="action" name="action" value="1"> <!-- Aprobacion -->
@@ -317,7 +317,7 @@
                                     </select>
                                 <?php
                                 }else{?>
-                                    <input type="text" class="form-control" id="section" name="section"  required>
+                                    <input type="url" class="form-control" id="section" name="section" minlength="10" maxlength="500" placeholder="Ejemplo: https//www.miclasevirtual.com/seccion/tutoria1" required>
                                 <?php
                                 }
                                 ?>
