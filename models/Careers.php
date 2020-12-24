@@ -9,7 +9,7 @@ class Careers
     {
         $this->id = 0;
         $this->name = '';
-        $this->connection = database::connect();
+        $this->connection = databaseController::connect();
     }
 
 

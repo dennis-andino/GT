@@ -11,7 +11,7 @@ class Courses
         $this->id = 0;
         $this->coursename = "";
         $this->career = 0;
-        $this->connection = database::connect();
+        $this->connection = databaseController::connect();
     }
 
 

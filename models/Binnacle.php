@@ -7,7 +7,7 @@ private $connection;
 
     public function __construct()
     {
-        $this->connection = database::connect();
+        $this->connection = databaseController::connect();
     }
 
     public function getAllEvents(){
@@ -28,7 +28,7 @@ private $connection;
         return $this->connection->query("SELECT SUBSTRING(date_event,6,2) AS month , count(*) as total FROM binnacle group by month;");
     }
     public static function registerExceptions($description,$username,$ip='127.0.0.1'):void{
-        database::connect()->query("INSERT INTO BINNACLE(typeevent, description,username, ip_address) VALUES ('Excepcion','{$description}','{$username}','{$ip}');");
+        databaseController::connect()->query("INSERT INTO BINNACLE(typeevent, description,username, ip_address) VALUES ('Excepcion','{$description}','{$username}','{$ip}');");
     }
 
 

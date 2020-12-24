@@ -7,7 +7,7 @@ echo $hoy;
 
 $nombreDelArchivo = "graduacion.png";
 $extension = pathinfo($nombreDelArchivo, PATHINFO_EXTENSION);
-echo $extension;*/
+echo $extension;
 $content=" Hola Dennis , hemos hecho el cambio solicitado, su nueva clave es:<br> <li>TREFGT567 </li>";
 $content = str_replace("\n.", "\n..", $content);
 $cuerpo="
@@ -19,5 +19,6 @@ $cuerpo="
        <p style='font-size:15px; font-family:Verdana, Geneva, sans-serif;'>Atte. Vicerrectoria de gestion academica.</p>
        <p style='font-size:10px;'><strong>Nota: </strong>Si usted no ha solicitado cambio de contraseña , por favor notificarnos inmediatamente al departamento de gestion academica , o al correo : soporte@unitec.edu</p></td></tr></tbody></table>
  </td></tr></table></body></html>";
-echo $cuerpo;
-?>
+echo $cuerpo;*/
+
+header('Location:'.base_url.'database/backUp');

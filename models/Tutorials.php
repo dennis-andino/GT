@@ -25,7 +25,7 @@ class Tutorials
         $this->tutcomment = "";
         $this->modality=0;
         $this->space="No definido";
-        $this->connection = database::connect();
+        $this->connection = databaseController::connect();
 
     }
 

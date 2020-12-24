@@ -100,7 +100,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url . 'schedule/index'?>" class="nav-link">
+                        <a href="<?= base_url . 'database/backupList'?>" class="nav-link">
                             <i class="fas fa-database"></i>
                             <p>
                                 Datos
@@ -145,6 +145,10 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
+
+<?php if(isset($_SESSION['alert'])):?>
+    <script> swal("<?=$_SESSION['alert']['title']?>","<?=$_SESSION['alert']['msj']?>","<?=$_SESSION['alert']['type']?>");</script>
+    <?php unset($_SESSION['alert']); endif; ?>
 <script>
     $(document).ready(function () {
         $('#tutoriastbl').DataTable({

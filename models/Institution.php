@@ -14,7 +14,7 @@ class Institution
         $this->telefone='';
         $this->email='';
         $this->logo='';
-        $this->connection = database::connect();
+        $this->connection = databaseController::connect();
     }
 
     public function getId(): int

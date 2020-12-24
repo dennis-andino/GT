@@ -7,7 +7,7 @@ class Campus
     public function __construct()
     {
         $this->id = 0;
-        $this->connection = database::connect();
+        $this->connection = databaseController::connect();
     }
 
     public function getAllCampus()

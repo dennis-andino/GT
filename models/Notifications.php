@@ -14,7 +14,7 @@ class Notifications
         $this->content = '';
         $this->status = 0;
         $this->date = '';
-        $this->connection = database::connect();
+        $this->connection = databaseController::connect();
     }
 
 

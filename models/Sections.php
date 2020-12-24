@@ -10,7 +10,7 @@ private $id,$description,$availability;
         $this->id=0;
         $this->description='';
         $this->availability=1;
-        $this->connection = database::connect();
+        $this->connection = databaseController::connect();
     }
 
 

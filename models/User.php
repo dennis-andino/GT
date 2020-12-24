@@ -26,7 +26,7 @@ class user
         $this->availability= 1;
         $this->alias="";
         $this->observations="";
-        $this->connection = database::connect();
+        $this->connection = databaseController::connect();
 
     }
 

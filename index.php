@@ -2,7 +2,7 @@
 session_start();
 require_once 'core/autoload.php';
 require_once 'core/parameters.php';
-require_once 'core/database.php';
+require_once 'core/databaseController.php';
 require_once 'helpers/Utils.php';
 
 if (isset($_GET['controller'])) {

@@ -16,7 +16,7 @@ class Schedules
         $this->finishtime="";
         $this->career=0;
         $this->campus=0;
-        $this->connection= database::connect();
+        $this->connection= databaseController::connect();
     }
 
 
