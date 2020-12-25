@@ -60,7 +60,11 @@
                                             <td><?= $backup->description ?></td>
                                             <td>
                                                 <a role="button" class="btn btn-info btn-sm" href="<?= base_url.'assets/backup_bd/'.$backup->filename?>">Descargar</a>
-                                                <a role="button" class="btn btn-warning btn-sm" href="">restaurar</a>
+                                                <form method="post" action="<?=base_url.'database/backupRestore'?>" style="display: inline-block;">
+                                                    <input type="hidden" name="filename" value="<?=$backup->filename?>">
+                                                    <button type="submit" class="btn btn-warning btn-sm" href="<?= base_url.''?>">Restaurar</button>
+                                                </form>
+
                                         </tr>
                                         <?php
                                     }
