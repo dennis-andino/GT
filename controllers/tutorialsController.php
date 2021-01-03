@@ -112,7 +112,7 @@ class tutorialsController
                 if ($tutoria && $members) {
                     $_SESSION['form'] = true;
                     $_SESSION['members'] = $members->fetch_all(MYSQLI_ASSOC);
-                    $_SESSION['tutoria'] = $tutoria->fetch_object();
+                    $_SESSION['tutoria'] = $tutoria->fetch_assoc();
                 } else {
                     $_SESSION['form'] = false;
                     $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al obtener la informacion, intentalo de nuevo !", "type" => "error");
@@ -120,11 +120,11 @@ class tutorialsController
                 if ($_SESSION['baseon'] == 'Tutor') {
                     header('Location:'.base_url.'home/tutor');
                 } elseif ($_SESSION['baseon'] == 'Coordinator') {
-                    if (($_SESSION['tutoria']->status == -1 || $_SESSION['tutoria']->status == 1) && !isset($_SESSION['asignatures'])) {
+                    if (($_SESSION['tutoria']['status'] == -1 || $_SESSION['tutoria']['status'] == 1) && !isset($_SESSION['asignatures'])) {
                         require_once 'models/Courses.php';
                         $courses_object = new Courses();
                         $_SESSION['asignatures'] = $courses_object->getCoursesByTutorial((int)$_SESSION['tutoria']->id)->fetch_all(MYSQLI_ASSOC);
-                        if ($_SESSION['tutoria']->modality == 0) {
+                        if ($_SESSION['tutoria']['modality'] == 0) {
                             require_once 'models/Sections.php';
                             $sectionObject = new Sections();
                             $_SESSION['sections'] = $sectionObject->getAllEnables()->fetch_all(MYSQLI_ASSOC);
@@ -282,6 +282,7 @@ class tutorialsController
                 $tutoria->setId((int)$_POST['idtutorial']);
                 if ($tutoria->startTutorial()) {
                     $_SESSION['tutoria']->status = 0;
+                    $_SESSION['alert'] = array("title" => "Tutoria iniciada", "msj" => " Buena suerte con su tutoria !", "type" => "success");
                 }
             } else {
                 $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Parece ser que la informacion recibida esta incompleta, intentelo nuevamente.", "type" => "error");
@@ -302,6 +303,7 @@ class tutorialsController
             $tutoria->setId((int)$_POST['idtutorial']);
             if ($tutoria->stopTutorial()) {
                 $_SESSION['tutoria']->status = 2;
+                $_SESSION['alert'] = array("title" => "Tutoria finalizada", "msj" => "La tutoria se ha finalizado satisfactoriamente.", "type" => "warning");
             }
         }
         homeController::tutor();

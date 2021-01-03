@@ -11,10 +11,13 @@ CREATE TABLE `backups` (
   `autor` varchar(50) NOT NULL,
   `filename` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 INSERT INTO backups VALUES (1,"2020-12-23 11:45:18","Backup de prueba","dennis_andino","gtBD-20201224_043918.sql"),
-(2,"2020-12-24 01:16:30","Respaldo del ultimo trimestre del 2020","Administrator default","gtBD-20201224_081630.sql");
+(2,"2020-12-29 22:04:23","backup 1","Administrator default","gtBD-20201230_050423.sql"),
+(3,"2020-12-29 22:04:31","backup 2","Administrator default","gtBD-20201230_050431.sql"),
+(4,"2020-12-29 22:04:37","backup 3","Administrator default","gtBD-20201230_050437.sql"),
+(5,"2020-12-29 22:04:46","backup 4","Administrator default","gtBD-20201230_050446.sql");
 
 
 DROP TABLE IF EXISTS `binnacle`;
@@ -28,7 +31,7 @@ CREATE TABLE `binnacle` (
   `username` varchar(25) DEFAULT NULL,
   `ip_address` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8;
 
 INSERT INTO binnacle VALUES (1,"Error ","Excepciones","2020-12-13","04:48","dennis_andino","192.168.1.2"),
 (2,"error","No se encontro la base de datos","2020-01-01","00:00","defaul user","204.34.21.12"),
@@ -134,7 +137,24 @@ INSERT INTO binnacle VALUES (1,"Error ","Excepciones","2020-12-13","04:48","denn
 (102,"login","inicio de sesion","2020-12-23","22:22","administrator_default","::1"),
 (103,"login","inicio de sesion","2020-12-23","22:49","administrator_default","::1"),
 (104,"login","inicio de sesion","2020-12-23","22:55","administrator_default","::1"),
-(105,"login","inicio de sesion","2020-12-24","01:17","administrator_default","::1");
+(105,"login","inicio de sesion","2020-12-24","20:18","coordinator_default","::1"),
+(106,"login","inicio de sesion","2020-12-28","23:07","tutor_default","::1"),
+(107,"login","inicio de sesion","2020-12-28","23:54","student_default","::1"),
+(108,"login","inicio de sesion","2020-12-28","23:54","student_default","::1"),
+(109,"login","inicio de sesion","2020-12-29","00:01","tutor_default","::1"),
+(110,"login","inicio de sesion","2020-12-29","00:34","student_default","::1"),
+(111,"login","inicio de sesion","2020-12-29","00:34","student_default","::1"),
+(112,"login","inicio de sesion","2020-12-29","17:08","coordinator_default","::1"),
+(113,"login","inicio de sesion","2020-12-29","20:12","student_default","::1"),
+(114,"login","inicio de sesion","2020-12-29","20:12","student_default","::1"),
+(115,"login","inicio de sesion","2020-12-29","21:09","administrator_default","::1"),
+(116,"login","inicio de sesion","2020-12-29","21:09","administrator_default","::1"),
+(117,"login","inicio de sesion","2020-12-29","21:09","administrator_default","::1"),
+(118,"login","inicio de sesion","2020-12-29","21:12","administrator_default","::1"),
+(119,"login","inicio de sesion","2020-12-29","21:26","student_default","::1"),
+(120,"login","inicio de sesion","2020-12-29","21:27","student_default","::1"),
+(121,"login","inicio de sesion","2020-12-29","21:33","administrator_default","::1"),
+(122,"login","inicio de sesion","2020-12-29","21:42","administrator_default","::1");
 
 
 DROP TABLE IF EXISTS `campus`;
@@ -244,7 +264,7 @@ CREATE TABLE `logins` (
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 INSERT INTO logins VALUES (2,"dennis_andino","$2y$04$AwVLA12xB5mD2C7tXxJwiuqESFMyjtM1G6WMJqqXr.smSclv1KHpe",1,"2020-11-09","2020-11-09","Dennis Fermin Motino Andino","Dennis Motino","dennis_andino@unitec.edu",97231583,1,3,31745643,"1993-07-09","2020-11-09","Student.png",0,"soy estudiante pasante de la carrera....",1,1),
-(3,"student_default","$2y$04$jUyA00YEVvAWnOrbcORBLuQMA7txM9/6GLSfqvKNDwoeiNWa3ZIKS",1,"2020-11-09","2020-11-09","student default","student ","studentdefault@gmail.com",97231583,1,3,31745643,"2020-11-19","2020-11-10","Student.png",0,"usuario por defecto del sistema.",1,1),
+(3,"student_default","$2y$04$efTyMrEgOzUkEVAfSNRnr.A2Z1D868MDx6zOrfFi1Re9mdhPhntr6",1,"2020-11-09","2020-11-09","student default","student ","studentdefault@gmail.com",97231583,1,3,31745643,"2020-11-19","2020-11-10","Student.png",0,"usuario por defecto del sistema.",1,1),
 (4,"tutor_default","$2y$04$efTyMrEgOzUkEVAfSNRnr.A2Z1D868MDx6zOrfFi1Re9mdhPhntr6",2,"10-22-2020","10-15-2020","Dennis F motino Andino","tutor default","dennis@andino@unitec.edu",97231583,2,2,31711448,"10-22-2020","10-22-2016","Student.png",0,NULL,1,1),
 (5,"coordinator_default","$2y$04$efTyMrEgOzUkEVAfSNRnr.A2Z1D868MDx6zOrfFi1Re9mdhPhntr6",3,"10-22-2020","10-15-2020","Dennis F motino Andino","coordinator default","dennis_andino@unitec.com",97231583,1,1,31711465,"09-07-2020","10-22-2016","pepito.jpg",0,"Coordinador del departamento de Asistencia estudiantil desde 2002 con alto reconocimiento bla bla...",1,1),
 (6,"celena_castillo","$2y$04$efTyMrEgOzUkEVAfSNRnr.A2Z1D868MDx6zOrfFi1Re9mdhPhntr6",2,"10-22-2020","10-15-2020","Lidia Celena Castillo Palma","Celena castillo","celenacastillo@unitec.edu",32857015,1,5,31711448,"1996-01-20","10-22-2016","userdefault.png",0,"Pasante de Administración , bilingue , soltera , buena onda la wuirra.",1,1),

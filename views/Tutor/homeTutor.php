@@ -58,7 +58,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link navbar-navy">
+        <a href="<?= base_url . 'institution/index'?>" class="brand-link navbar-navy">
             <img src="../assets/img/<?=$_SESSION['logo']?>" alt="Ceutec Logo" class="brand-image img-circle elevation-3">
             <span class="brand-text font-weight-light"><?=$_SESSION['institution']?></span>
         </a>

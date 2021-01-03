@@ -10,26 +10,28 @@ class dataBaseRestore
     private $charset;
     private $conn;
     private $disableForeignKeyChecks;
-public $output;
+    public $output;
 
-    function __construct() {
-        $this->host                    = DB_HOST;
-        $this->username                = DB_USER;
-        $this->passwd                  = DB_PASSWORD;
-        $this->dbName                  = DB_NAME;
-        $this->charset                 = CHARSET;
+    function __construct()
+    {
+        $this->host = DB_HOST;
+        $this->username = DB_USER;
+        $this->passwd = DB_PASSWORD;
+        $this->dbName = DB_NAME;
+        $this->charset = CHARSET;
         $this->disableForeignKeyChecks = true;
-        $this->conn                    = $this->initializeDatabase();
-        $this->backupDir               = BACKUP_DIR;
-        $this->backupFile              = null;
-        $this->output='';
+        $this->conn = $this->initializeDatabase();
+        $this->backupDir = BACKUP_DIR;
+        $this->backupFile = null;
+        $this->output = '';
 
     }
 
     /**
      * Destructor re-enables foreign key checks
      */
-    function __destructor() {
+    function __destructor()
+    {
         /**
          * Re-enable foreign key checks
          */
@@ -38,7 +40,8 @@ public $output;
         }
     }
 
-    protected function initializeDatabase() {
+    protected function initializeDatabase()
+    {
         try {
             $conn = mysqli_connect($this->host, $this->username, $this->passwd, $this->dbName);
             if (mysqli_connect_errno()) {
@@ -46,7 +49,7 @@ public $output;
                 die();
             }
             if (!mysqli_set_charset($conn, $this->charset)) {
-                mysqli_query($conn, 'SET NAMES '.$this->charset);
+                mysqli_query($conn, 'SET NAMES ' . $this->charset);
             }
 
             /**
@@ -68,13 +71,14 @@ public $output;
      * Backup the whole database or just some tables
      * Use '*' for whole database or 'table1 table2 table3...'
      */
-    public function restoreDb($backupFile=null) {
+    public function restoreDb($backupFile = null)
+    {
         try {
             $sql = '';
             $multiLineComment = false;
 
             $backupDir = $this->backupDir;
-            $this->backupFile=$backupFile;
+            $this->backupFile = $backupFile;
 
             /**
              * Gunzip file if gzipped
@@ -90,7 +94,7 @@ public $output;
              * Read backup file line by line
              */
 
-                $handle = fopen($backupDir . '/' . $backupFile, "r");
+            $handle = fopen($backupDir . '/' . $backupFile, "r");
             if ($handle) {
                 while (($line = fgets($handle)) !== false) {
                     $line = ltrim(rtrim($line));
@@ -107,7 +111,7 @@ public $output;
                             $sql .= $line;
                             if (preg_match('/;$/', $line)) {
                                 // execute query
-                                if(mysqli_query($this->conn, $sql)) {
+                                if (mysqli_query($this->conn, $sql)) {
                                     if (preg_match('/^CREATE TABLE `([^`]+)`/i', $sql, $tableName)) {
                                         $this->obfPrint("Tabla creada satisfactoriamente : `" . $tableName[1] . "`");
                                     }
@@ -141,7 +145,8 @@ public $output;
      * Gunzip backup file
      * @return string New filename (without .gz appended and without backup directory) if success, or false if operation fails
      */
-    protected function gunzipBackupFile() {
+    protected function gunzipBackupFile()
+    {
         // Raising this value may increase performance
         $bufferSize = 4096; // read 4kb at a time
         $error = false;
@@ -169,7 +174,7 @@ public $output;
         while (!gzeof($srcFile)) {
             // Read buffer-size bytes
             // Both fwrite and gzread are binary-safe
-            if(!fwrite($dstFile, gzread($srcFile, $bufferSize))) {
+            if (!fwrite($dstFile, gzread($srcFile, $bufferSize))) {
                 return false;
             }
         }
@@ -184,7 +189,8 @@ public $output;
     /**
      * Prints message forcing output buffer flush
      */
-    public function obfPrint ($msg = '', $lineBreaksBefore = 0, $lineBreaksAfter = 1) {
+    public function obfPrint($msg = '', $lineBreaksBefore = 0, $lineBreaksAfter = 1)
+    {
         if (!$msg) {
             return false;
         }
@@ -214,7 +220,7 @@ public $output;
         if (php_sapi_name() == "cli") {
             $output .= "\n";
         }
-$this->output.=$output;
+        $this->output .= $output;
         //echo $output;
 
         if (php_sapi_name() != "cli") {

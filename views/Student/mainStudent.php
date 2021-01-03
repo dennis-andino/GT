@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Comentarios</label>
-                                        <textarea class="form-control form-control-sm" rows="2" id="details" name="details" placeholder="explique con mas detalle la razon de la solicitud" required></textarea>
+                                        <textarea class="form-control form-control-sm" rows="2" id="details" name="details" placeholder="Explique con mas detalle la razon de la solicitud" required></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="filename">Adjuntar archivo (.JPG .PNG .PDF o .DOC)(opcional)</label>

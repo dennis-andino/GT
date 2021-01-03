@@ -56,15 +56,15 @@
                                                     <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $onetutorial->id ?>">
                                                     <?php
                                                     if ($onetutorial->status == 0) { ?> <!--Tutoria en proceso-->
-                                                        <button class="btn btn-success btn-sm " data-toggle="tooltip" data-placement="top" title="en proceso">
+                                                        <button class="btn btn-success btn-sm " data-toggle="tooltip" data-placement="top" title="Tutoria en proceso...">
                                                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                                         </button>
                                                         <?php
                                                     } else if ($onetutorial->status == 1) { ?> <!-- aprobada/programada -->
-                                                        <button name="action" value="getinfo" type="submit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoria Programada"><i class="far fa-clock"></i></button>
+                                                        <button name="action" value="getinfo" type="submit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoria Programada."><i class="far fa-clock"></i></button>
                                                         <?php
-                                                    } else { ?> <!-- denegada/finalizada -->
-                                                        <button name="action" value="getinfo" type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="detalle de tutoria"><i class="fas fa-check-double"></i></button>
+                                                    } else { ?> <!-- finalizada -->
+                                                        <button name="action" value="getinfo" type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoria Finalizada."><i class="fas fa-check-double"></i></button>
                                                         <?php
                                                     }
                                                     ?>
@@ -86,30 +86,30 @@
                     <div class="col-lg-5">
                         <div class="card card-primary">
                             <div class="card-header text-left">
-                                <h5 class="m-0">Solicitud &nbsp;#<?= $_SESSION['tutoria']->id ?>
+                                <h5 class="m-0">Solicitud &nbsp;#<?= $_SESSION['tutoria']['id'] ?>
                                     <?php
-                                    if ($_SESSION['tutoria']->status == 1) { ?>
+                                    if ($_SESSION['tutoria']['status'] == 1) { ?>
                                         <span class="badge badge-secondary">Lista para iniciar</span>
                                         <?php
-                                    }elseif ($_SESSION['tutoria']->status == 0) { ?>
+                                    }elseif ($_SESSION['tutoria']['status'] == 0) { ?>
                                         <span class="badge badge-info">Ahora mismo ejecutandose</span>
                                         <?php
-                                    } elseif ($_SESSION['tutoria']->status == 2) { ?>
+                                    } elseif ($_SESSION['tutoria']['status'] == 2) { ?>
                                         <span class="badge badge-secondary">Finalizada</span>
                                         <?php
                                     }
                                     ?>
                                     <div class="float-right">
                                         <?php
-                                        if ($_SESSION['tutoria']->status == 1) {?>
+                                        if ($_SESSION['tutoria']['status'] == 1) {?>
                                             <form action="<?= base_url . 'tutorials/start' ?>" method="POST">
-                                                <input type="hidden" id="idtutorial" name="idtutorial" value="<?=$_SESSION['tutoria']->id?>">
+                                                <input type="hidden" id="idtutorial" name="idtutorial" value="<?=$_SESSION['tutoria']['id']?>">
                                                 <button type="submit" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Iniciar Tutoria"><i class="fas fa-play"></i></button>
                                             </form>
                                             <?php
-                                        } elseif ($_SESSION['tutoria']->status == 0) { ?>
+                                        } elseif ($_SESSION['tutoria']['status'] == 0) { ?>
                                             <form action="<?= base_url . 'tutorials/stop' ?>" method="POST">
-                                                <input type="hidden" id="idtutorial" name="idtutorial" value="<?=$_SESSION['tutoria']->id?>">
+                                                <input type="hidden" id="idtutorial" name="idtutorial" value="<?=$_SESSION['tutoria']['id']?>">
                                                 <button type="submit" class="btn btn-danger btn-sm"
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="Finalizar Tutoria"><i class="fas fa-stop-circle"></i>
@@ -128,32 +128,32 @@
                                         <tbody>
                                         <tr>
                                             <th scope="row">Solicitante:</th>
-                                            <td><?= $_SESSION['tutoria']->studentname ?></td>
+                                            <td><?= $_SESSION['tutoria']['studentname'] ?></td>
                                             <th scope="row">Solicitada el:</th>
-                                            <td><?= $_SESSION['tutoria']->requestdate ?></td>
+                                            <td><?= $_SESSION['tutoria']['requestdate'] ?></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Asignada a :</th>
                                             <td>Usted</td>
                                             <th scope="row">Programada para:</th>
-                                            <td><?= $_SESSION['tutoria']->reservdate ?></td>
+                                            <td><?= $_SESSION['tutoria']['reservdate'] ?></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Horario:</th>
-                                            <td><?= $_SESSION['tutoria']->schedule ?></td>
+                                            <td><?= $_SESSION['tutoria']['schedule'] ?></td>
                                             <th scope="row">Curso:</th>
-                                            <td><?= $_SESSION['tutoria']->coursename ?></td>
+                                            <td><?= $_SESSION['tutoria']['coursename'] ?></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Asunto:</th>
-                                            <td colspan="3"><?= $_SESSION['tutoria']->subject ?></td>
+                                            <td colspan="3"><?= $_SESSION['tutoria']['subject'] ?></td>
                                         </tr>
                                         <tr>
                                                 <th scope="row">Seccion:</th>
-                                                <td colspan="3"><?php if ($_SESSION['tutoria']->modality == 0): ?>
+                                                <td colspan="3"><?php if ($_SESSION['tutoria']['modality'] == 0): ?>
                                                     <?= $_SESSION['tutoria']->space ?>
                                                 <?php else: ?>
-                                                        <a href="<?= $_SESSION['tutoria']->space ?>"><strong>Aula Virtual</strong></a>
+                                                        <a href="<?= $_SESSION['tutoria']['space'] ?>"><strong>Aula Virtual</strong></a>
                                                 <?php endif;?>
                                                     </td>
                                                     </tr>
@@ -163,21 +163,21 @@
                                         <tr>
                                             <td colspan="4">
                                                 <div class="card-body">
-                                                    <?= $_SESSION['tutoria']->details ?>
+                                                    <?= $_SESSION['tutoria']['details'] ?>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <?php if($_SESSION['tutoria']->filename!='0'):?>
+                                        <?php if($_SESSION['tutoria']['filename']!='0'):?>
                                         <tr>
                                             <th scope="row">Adjuntos:</th>
-                                            <td colspan="3"><a href="../uploads/documents/<?=$_SESSION['tutoria']->filename?>" class="badge badge-light"><?= $_SESSION['tutoria']->filename ?></a></td>
+                                            <td colspan="3"><a href="../uploads/documents/<?=$_SESSION['tutoria']['filename']?>" class="badge badge-light"><?= $_SESSION['tutoria']->filename ?></a></td>
                                         </tr>
                                         <?php endif;?>
                                         </tbody>
                                     </table>
                                 </div>
                                 <form action="<?= base_url . 'tutorials/SaveAssistance'?>" method="POST">
-                                    <input type="hidden" name="idtutorial" id="idtutorial" value="<?=$_SESSION['tutoria']->id?>">
+                                    <input type="hidden" name="idtutorial" id="idtutorial" value="<?=$_SESSION['tutoria']['id']?>">
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                         <tr>
@@ -212,7 +212,7 @@
                                         <!--0 en proceso, 1 aprobado/programada ,2 finalizado,3 denegado  -->
                                     </table>
                                     <?php
-                                    if ($_SESSION['tutoria']->status == 0) { ?>
+                                    if ($_SESSION['tutoria']['status'] == 0) { ?>
                                         <button class="btn btn-info" type="submit">Enviar Asistencia</button>
                                         <?php
                                     }
