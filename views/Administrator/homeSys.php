@@ -1,3 +1,7 @@
+<?php if(isset($_SESSION['logout'])){
+    session_destroy();
+    header('Location:'.base_url.'home/logout');
+} ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -108,6 +112,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="<?= base_url . 'binnacle/eventList'?>" class="nav-link">
+                            <i class="fab fa-elementor"></i>
+                            <p>
+                                Bitácora
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?=base_url.'binnacle/statistics'?>" class="nav-link">
                             <i class="fas fa-chart-pie"></i>
                             <p>
@@ -115,11 +127,19 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview">
+                    <li class="nav-item">
                         <a href="<?=base_url.'users/myAccountInfo'?>" class="nav-link">
                             <i class="fas fa-user-tie"></i>
                             <p>
                                 Mi Cuenta
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://unitechn-my.sharepoint.com/:b:/g/personal/dennis_andino_unitec_edu/EdyZvUMAhWFCqIY6eYmStnAB8EOKnoOj9Ro3wS1ZHFs_DQ?e=vcfiK4" target="_blank" class="nav-link">
+                            <i class="fas fa-book"></i>
+                            <p>
+                                Manual de sistema
                             </p>
                         </a>
                     </li>
@@ -152,7 +172,7 @@
 <script>
     $(document).ready(function () {
         $('#tutoriastbl').DataTable({
-            "ordering": false,
+            "ordering": true,
             "responsive": true,
             "autoWidth": false,
             "language": {

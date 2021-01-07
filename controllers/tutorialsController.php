@@ -169,7 +169,7 @@ class tutorialsController
         } catch (Exception $e) {
             $_SESSION['panel'] = 'errorInk';
         } finally {
-            require 'views\Student\homeStudent.php';
+            require_once 'views\Student\homeStudent.php';
         }
     }
 

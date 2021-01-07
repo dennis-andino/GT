@@ -41,7 +41,7 @@ class databaseController
     }
 
 
-    public function backupList()
+    public static function backupList()
     {
         try {
             $backupList = null;

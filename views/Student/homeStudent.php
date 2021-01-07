@@ -1,3 +1,7 @@
+<?php if(isset($_SESSION['logout'])){
+    session_destroy();
+    header('Location:'.base_url.'home/logout');
+} ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

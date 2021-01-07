@@ -26,7 +26,7 @@
                 <!-- /.col-md-6 -->
                 <div class="col-lg-2">
                     <div class="card card-success card-outline">
-                        <img src="../assets/dist/img/user2-160x160.png" class="img-fluid img-circle">
+                        <img src="../uploads/photos/<?=$user->photo?>" class="img-fluid img-circle">
                         <div class="card-body">
                             <h5 class="card-title"><?=$user->alias?></h5>
                             <p class="card-text"><?=$user->privilege?></p>

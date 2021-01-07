@@ -3,13 +3,15 @@ require_once 'models/User.php';
 
 class usersController
 {
-    private $userObject;
 
     public function index()
     {
         try{
             $userObject = new user();
             $userslist = $userObject->getAllusers($_SESSION['baseon']);
+            if($userslist){
+                $_SESSION['userslist']=$userslist->fetch_all(MYSQLI_ASSOC);
+            }
             if (!isset($_SESSION['careers']) && !isset($_SESSION['campus'])) {
                 require_once 'models/Careers.php';
                 require_once 'models/Campus.php';
@@ -24,11 +26,12 @@ class usersController
         } finally {
             $_SESSION['panel'] = 'usersModuleInk';
             if ($_SESSION['baseon'] == 'Coordinator') {
-                require_once 'views\Coordinator\homeCoordinator.php';
+                require_once 'views/Coordinator/homeCoordinator.php';
             } elseif ($_SESSION['baseon'] == 'Sys') {
-                require_once 'views\Administrator\homeSys.php';
+                require_once 'views/Administrator/homeSys.php';
             } else {
-                logout();
+                echo 'pepe';
+               // homeController::logout();
             }
         }
     }
@@ -161,7 +164,7 @@ class usersController
         } catch (Exception $e) {
             $_SESSION['panel'] = 'errorInk';
         } finally {
-           self::myAccountInfo();
+           self::userInfo();
         }
     }
 

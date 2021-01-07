@@ -132,15 +132,7 @@ class homeController
 
     public static function sys()
     {
-        if ($_SESSION['baseon'] == 'Sys') {
-            $_SESSION['panel'] = 'mainSys';
-            require_once 'models/Binnacle.php';
-            $BinnacleObject = new Binnacle();
-            $eventList = $BinnacleObject->getAllEvents();
-            require_once 'views/Administrator/homeSys.php';
-        } else {
-            homeController::logout();
-        }
+        databaseController::backupList();
     }
 
     public function save()
@@ -181,8 +173,10 @@ class homeController
     public static function logout()
     {
         if (isset($_SESSION)) {
-            session_destroy();
+            $_SESSION=array();
             session_unset();
+            session_destroy();
+            $_SESSION['logout']=true;
             header("Location:" . base_url);
         }
     }

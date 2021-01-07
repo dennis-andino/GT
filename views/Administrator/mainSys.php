@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Bitacora</h1>
+                    <h1 class="m-0 text-dark">Registro de eventos</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
                 <div class="col">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Registro de eventos</h5>
+                            <h5 class="m-0">Bitacora</h5>
                         </div>
                         <div class="card-body table-responsive">
                             <table id="tutoriastbl" class="table table-hover">

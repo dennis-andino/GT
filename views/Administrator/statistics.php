@@ -1,11 +1,54 @@
+<style type="text/css">
+    .highcharts-figure, .highcharts-data-table table {
+        min-width: 320px;
+        max-width: 800px;
+        margin: 1em auto;
+    }
 
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #EBEBEB;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+
+
+    input[type="number"] {
+        min-width: 50px;
+    }
+</style>
+<script src="<?=base_url?>assets/js/charts/highcharts.js"></script>
+<script src="<?=base_url?>assets/js/charts/modules/exporting.js"></script>
+<script src="<?=base_url?>assets/js/charts/modules/export-data.js"></script>
+<script src="<?=base_url?>assets/js/charts/modules/accessibility.js"></script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Estadisticas</h1>
+                    <h1 class="m-0 text-dark">Estadisticas de eventos</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -28,9 +71,8 @@
                         <div class="card-header">
                             <h5 class="m-0">Eventos por tipo</h5>
                         </div>
-                        <div class="card-body">
-                            <canvas id="byevent"></canvas>
-                        </div>
+                        <!-- aqui primer grafico [por tipo]-->
+                        <div class="card-body" id="eventtype"></div>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -38,9 +80,8 @@
                         <div class="card-header">
                             <h5 class="m-0">Eventos por mes</h5>
                         </div>
-                        <div class="card-body">
-                            <canvas id="bymonth"></canvas>
-                        </div>
+                        <!-- aqui segundo grafico [por mes]-->
+                        <div class="card-body" id="eventmonth"></div>
                     </div>
                 </div>
                 <!-- /.col-md-6 -->
@@ -51,91 +92,53 @@
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha256-t9UJPrESBeG2ojKTIcFLPGF7nHi2vEc7f5A2KpH/UBU=" crossorigin="anonymous"></script>
 <script>
-    var ctx = document.getElementById('byevent').getContext('2d');
-    var myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Login', 'Registro', 'Error', 'Otros'],
-            datasets: [{
-                data: [
-                   <?=$totalsByType?>
-                ],
-                backgroundColor: [
-                    'rgb(255, 99, 132, 0.5)',
-                    'rgb(255, 162, 235, 0.5)',
-                    'rgb(255, 206, 86, 0.5)',
-                    'rgb(75, 192, 192, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)'
-                ],
-                borderWidth: 2
+    $(function() {
+        var chartOptions = {
+            chart: {
+                renderTo: 'eventtype',
+                type: 'bar'
+            },
+            title: {
+                text: 'Eventos por tipo'
+            },
+            xAxis: {
+                categories: [<?=$Types?>]
+            },
+            yAxis: {
+                title: 'value'
+            },
+            series: [{
+                name: 'Eventos',
+                data: [<?=$totalsByType?>]
             }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
         }
+
+        var chart = new Highcharts.Chart(chartOptions);
     });
 </script>
 <script>
-    var ctxx = document.getElementById('bymonth').getContext('2d');
-    var myPieChartt = new Chart(ctxx, {
-        type: 'bar',
-        data: {
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril','Mayo', 'Junio', 'Julio', 'Agosto','Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            datasets: [{
-                label: 'Eventos/Mes',
-                data: [<?=$totalsByMonth?>],
-                backgroundColor: [
-                    'rgb(255, 206, 86, 0.5)',
-                    'rgb(75, 192, 192, 0.5)',
-                    'rgb(255, 99, 132, 0.5)',
-                    'rgb(63, 191, 63, 0.5)',
-                    'rgb(128, 128, 0, 0.5)',
-                    'rgb(255, 162, 235, 0.5)',
-                    'rgb(0, 128, 128, 0.5)',
-                    'rgb(0, 255, 255, 0.5)',
-                    'rgb(255, 160, 122, 0.5)',
-                    'rgb(34, 153, 84, 0.5)',
-                    'rgb(165, 105, 189 , 0.5)'
-
-                ],
-                borderColor: [
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(63, 191, 63, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(128, 128, 0, 1)',
-                    'rgba(0, 128, 128, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(0, 255, 255, 1)',
-                    'rgba(255, 160, 122, 1)',
-                    'rgba(34, 153, 84, 1)',
-                    'rgba(165, 105, 189, 1)'
-                ],
-                borderWidth: 2
+    $(function() {
+        var chartOptions = {
+            chart: {
+                renderTo: 'eventmonth',
+                type: 'line'
+            },
+            title: {
+                text: 'Eventos por mes'
+            },
+            xAxis: {
+                categories: [<?=$Months?>]
+            },
+            yAxis: {
+                title: 'value'
+            },
+            series: [{
+                name: 'Eventos',
+                data: [<?=$totalsByMonth?>]
             }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
         }
+
+        var chart = new Highcharts.Chart(chartOptions);
     });
 </script>

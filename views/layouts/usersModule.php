@@ -44,28 +44,28 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                if(isset($userslist)){
-                                    while ($user = $userslist->fetch_object()) {
+                                if(isset($_SESSION['userslist'])){
+                                    foreach ($_SESSION['userslist'] as $user) {
                                         ?>
                                         <tr>
-                                            <td><?=$user->id?></td>
-                                            <td><?=$user->alias?></td>
-                                            <td><?=$user->privilege?></td>
-                                            <td><?=$user->email?></td>
-                                            <td><?=$user->phone?></td>
+                                            <td><?=$user['id']?></td>
+                                            <td><?=$user['alias']?></td>
+                                            <td><?=$user['privilege']?></td>
+                                            <td><?=$user['email']?></td>
+                                            <td><?=$user['phone']?></td>
                                             <td>
 
                                             <form action="<?= base_url.'users/userInfo'?>" method="POST" style="display: inline-block;">
-                                                <input type="hidden"  name="iduser" id="iduser" value="<?=$user->id?>">
-                                                <input type="hidden"  name="role" id="role" value="<?=$user->baseon?>">
+                                                <input type="hidden"  name="iduser" id="iduser" value="<?=$user['id']?>">
+                                                <input type="hidden"  name="role" id="role" value="<?=$user['baseon']?>">
                                                 <button type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver ficha completa"><i class="far fa-id-card"></i></button>
                                             </form>
-                                                <button type="button" value="<?=$user->id?>" id="<?=$user->id?>" class="btn btn-warning btn-sm edit-btn" data-toggle="modal" data-target="#editModal"><i class="fas fa-user-edit"></i></button>
+                                                <button type="button" value="<?=$user['id']?>" id="<?=$user['id']?>" class="btn btn-warning btn-sm edit-btn" data-toggle="modal" data-target="#editModal"><i class="fas fa-user-edit"></i></button>
                                                 <form action="<?= base_url.'users/enableUser'?>" method="POST" style="display: inline-block;">
-                                                    <input type="hidden" name="availability" value="<?=$user->availability?>">
-                                                    <input type="hidden"  name="iduser" id="iduser" value="<?=$user->id?>">
+                                                    <input type="hidden" name="availability" value="<?=$user['availability']?>">
+                                                    <input type="hidden"  name="iduser" id="iduser" value="<?=$user['id']?>">
                                                     <?php
-                                                    if($user->availability==1){ ?>
+                                                    if($user['availability']==1){ ?>
                                                         <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Desactivar usuario"><i class="fas fa-user-slash"></i></button>
                                                         <?php
                                                     }else{?>

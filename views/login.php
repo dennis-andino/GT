@@ -1,6 +1,10 @@
+<script src="<?=base_url?>assets/js/noback.js"></script>
+<?php if(isset($_SESSION['logout'])){unset($_SESSION['logout']);}?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Pragma" content="no-cache" />
     <meta charset="utf-8">
     <link rel="stylesheet" href="<?=base_url?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/css/login.css">
@@ -80,5 +84,6 @@
             </div>
         </div>
     </div>
+    <?php $_SESSION=array();?>
 </body>
 </html>
