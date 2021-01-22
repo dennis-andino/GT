@@ -4,5 +4,5 @@
         CEUTEC
     </div>
     <!-- Default to the left -->
-    <strong>Todos los desrechos reservados. &copy; 2020-2021 <a href="">Sistema de tutorias</a></strong>
+    <strong>Todos los derechos reservados. &copy; 2021-2022 <a href="">Sistema de tutorias</a></strong>
 </footer>

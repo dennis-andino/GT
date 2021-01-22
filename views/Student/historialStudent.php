@@ -115,7 +115,7 @@
                                             <?php else:?>
                                                 <td>Aula Virtual no programada</td>
                                             <?php endif; ?>
-                                                <td><span class="btn btn-block btn-secondary btn-xs disabled ">Calificado</span></td>
+                                                <td><span class="btn btn-block btn-secondary btn-xs disabled ">No permitido</span></td>
                                         </tr>
                                         <?php
                                     }
@@ -148,9 +148,9 @@
                 <form action="<?=base_url.'tutorials/setScore'?>" method="POST">
                     <input type="hidden" id="idtut" name="idtut">
                     <div class="form-group">
-                        <label for="score">Como califica la tutoria recibida?</label>
+                        <label for="score">¿Cómo califica la tutoria recibida?</label>
                         <select class="custom-select"  name="score" required>
-                            <option value="" selected>elija una opcion</option>
+                            <option value="" selected>Elija una opción</option>
                             <option value="4">Excelente</option>
                             <option value="3">Muy Buena</option>
                             <option value="2">Regular</option>

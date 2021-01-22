@@ -205,7 +205,7 @@
             </div>
             <div class="modal-body">
                 <form action="<?=base_url.'schedule/create'?>" method="POST">
-<div class="row">
+                    <div class="row">
                     <div class="form-group col-6">
                         <label for="starttime">Hora Inicial (24H)</label>
                         <input type="time" class="form-control" id="starttime" name="starttime" required>
@@ -214,18 +214,15 @@
                         <label for="finishtime">Hora Final (24H)</label>
                         <input type="time" class="form-control" id="finishtime" name="finishtime"  required>
                     </div>
-</div>
-
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
             </form>
-
         </div>
     </div>
-
 </div>
 
 <div class="modal fade" id="edit" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

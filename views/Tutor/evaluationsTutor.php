@@ -119,6 +119,31 @@
                                 ?>
                             </div>
                         </div>
+                        <div class="card-footer">
+                            <?php
+                            $promedio=round(($scoretotal/$commentnumber));
+                            switch($promedio){
+                                case 1:
+                                    $calification='Malo';
+                                    break;
+                                case 2:
+                                    $calification='Regular';
+                                    break;
+                                case 3:
+                                    $calification='Muy Bueno';
+                                    break;
+                                case 4:
+                                    $calification='Excelente';
+                                    break;
+                                default:
+                                    $calification='Sin calificar';
+                                    break;
+                            }
+                            ?>
+                            <button type="button" class="btn btn-sm btn-info">
+                                <?=$calification.' '?><span class="badge badge-light"><?=(($promedio*100)/4).'/100' ?></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -126,9 +151,7 @@
                         <div class="card-header">
                             <h5 class="m-0">Grafica de Evaluacion</h5>
                         </div>
-                        <div class="card-body" id="student_evaluation">
-
-                        </div>
+                        <div class="card-body" id="student_evaluation"></div>
                     </div>
                 </div>
                 <!-- /.col-md-6 -->

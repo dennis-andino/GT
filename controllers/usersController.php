@@ -30,8 +30,7 @@ class usersController
             } elseif ($_SESSION['baseon'] == 'Sys') {
                 require_once 'views/Administrator/homeSys.php';
             } else {
-                echo 'pepe';
-               // homeController::logout();
+               homeController::logout();
             }
         }
     }
@@ -75,6 +74,7 @@ class usersController
 
     public function userInfo()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try{
             if (isset($_POST['iduser']) && isset($_POST['role'])) {
                 $_SESSION['panel'] = 'userprofile';
@@ -104,6 +104,7 @@ class usersController
 
     public function myAccountInfo()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         if (isset($_SESSION['id'])) {
             try {
                 $userObject = new user();
@@ -273,7 +274,8 @@ class usersController
         }catch (Exception $e){
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al procesar la informacion, intentalo de nuevo !", "type" => "error");
         } finally {
-            self::myAccountInfo();
+            header('Location:'.base_url.'users/myAccountInfo');
+            //self::myAccountInfo();
         }
     }
 
@@ -293,7 +295,8 @@ class usersController
         }catch (Exception $e){
             $_SESSION['alert'] = array("title" => "Upps :(", "msj" => " Algo salio mal ! , no fue posible cambiar su clave, intentelo nuevamente.", "type" => "error");
         } finally {
-            $this->myAccountInfo();
+           // $this->myAccountInfo();
+            header('Location:'.base_url.'users/myAccountInfo');
         }
 
     }
@@ -314,6 +317,7 @@ class usersController
                     }
                     if ($user->updatePhoto()) {
                         move_uploaded_file($file['tmp_name'], 'uploads/photos/' . $filename);
+                        $_SESSION['photo']=$filename;
                         $_SESSION['alert'] = array("title" => "Imagen de perfil actualizada", "msj" => " Su imagen de perfil ha sido actualizada satisfactoriamente !", "type" => "success");
                     } else {
                         $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al procesar los datos, intentalo de nuevo !", "type" => "error");
@@ -326,7 +330,7 @@ class usersController
         }catch (Exception $e){
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al procesar la informacion, intentalo de nuevo !", "type" => "error");
         } finally {
-            self::myAccountInfo();
+            header('Location:'.base_url.'users/myAccountInfo');
         }
 
 

@@ -32,9 +32,7 @@ class databaseController
         } catch (Exception $e) {
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Lamentamos lo sucedido, no pudimos crear el respaldo solicitado !", "type" => "error");
         } finally {
-            // header('Location:'.base_url.'home/backupList');
             self::backupList();
-            exit();
         }
 
 
@@ -52,7 +50,7 @@ class databaseController
                 homeController::logout();
             }
         } catch (Exception $e) {
-
+            $_SESSION['panel'] = 'errorInk';
         } finally {
             require_once 'views/Administrator/homeSys.php';
             exit();
@@ -70,7 +68,7 @@ class databaseController
 
                 if ($result) {
                     $_SESSION['panel'] = 'backup';
-                    $_SESSION['alert'] = array("title" => "Restauracion exitosa", "msj" => "Yuppi !! el backup fue restaurado satisfactoriamente. !", "type" => "success");
+                    $_SESSION['alert'] = array("title" => "Restauracion exitosa", "msj" => "El backup fue restaurado satisfactoriamente. !", "type" => "success");
                 }else{
                     $_SESSION['panel'] = 'errorInk';
                     $_SESSION['alert'] = array("title" => "Backup dañado", "msj" => "Lamentamos lo sucedido, no pudimos restaurar la informacion. parece que el archivo no existe o esta dañado !", "type" => "error");
@@ -83,6 +81,7 @@ class databaseController
         } finally {
             require_once 'views/Administrator/homeSys.php';
             exit();
+
         }
     }
 

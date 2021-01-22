@@ -17,7 +17,7 @@ class Tutorials
         $this->status = 1;
         $this->period_ = 1;
         $this->score = 0;
-        $this->approvedby = "";
+        $this->approvedby = 1;
         $this->approval = "";
         $this->starttime = "";
         $this->finishtime = "";
@@ -38,6 +38,17 @@ class Tutorials
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+
+    public function getApprovedby(): int
+    {
+        return $this->approvedby;
+    }
+
+    public function setApprovedby(int $approvedby): void
+    {
+        $this->approvedby = $approvedby;
     }
 
 
@@ -128,16 +139,6 @@ class Tutorials
         $this->score = $score;
     }
 
-    public function getApprovedby(): string
-    {
-        return $this->approvedby;
-    }
-
-    public function setApprovedby(string $approvedby): void
-    {
-        $this->approvedby = $approvedby;
-    }
-
 
     public function getFilename(): string
     {
@@ -201,7 +202,7 @@ class Tutorials
 
     public function getNextSTutorials($career, $idStudent)
     {
-        return $this->connection->query("SELECT * FROM VW_NEXTUTORIALS WHERE  (career={$career} OR  career=2 OR  career=1) AND (status=-1 OR status=1) AND petitioner != {$idStudent}");
+        return $this->connection->query("SELECT * FROM VW_NEXTUTORIALS WHERE  (career={$career} OR  career=1 OR career=2) AND (status=-1 OR status=1) AND petitioner != {$idStudent};");
     }
 
     public function joinToTut()
@@ -248,7 +249,7 @@ class Tutorials
     }
 
     public function getHistoricGuest(){//Regresa el historial del uniones como invitado de un estudiante
-        return $this->connection->query("SELECT coursename,subject,reservdate,schedule,tutor,space,modalidad FROM GET_GUEST_ASSISTANCE WHERE student={$this->getPetitioner()} AND petitioner!={$this->getPetitioner()} ORDER BY id DESC LIMIT 10 ;");
+        return $this->connection->query("SELECT coursename,subject,reservdate,schedule,tutor,space,modalidad,status FROM GET_GUEST_ASSISTANCE WHERE student={$this->getPetitioner()} AND petitioner!={$this->getPetitioner()} ORDER BY id DESC LIMIT 10 ;");
     }
 
     public function getTutByTutor($tutorid){

@@ -4,7 +4,9 @@ require_once 'models/Notifications.php';
 class notificationController
 {
     public function seeNotifications(){
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try {
+
             $notifications=new Notifications();
             $notifications->setDestinationid((int)$_SESSION['id']);
             $notifications=$notifications->getNotReadByUser();

@@ -1,7 +1,6 @@
-<?php if(isset($_SESSION['logout'])){
-    session_destroy();
-    header('Location:'.base_url.'home/logout');
-} ?>
+<?php
+Utils::sessionOff(); // verifica si existe una sesion valida.
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +12,7 @@
     ?>
     <title>Gestion de tutorias</title>
 </head>
-<body class="hold-transition sidebar-mini sidebar-collapse">
+<body class="hold-transition sidebar-mini sidebar-collapse" onload="noback();">
 <div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark navbar-navy">
@@ -45,7 +44,7 @@
                 </div>
             </li>-->
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url ?>home/logout" role="button">
+                <a class="nav-link" href="<?=base_url?>home/logout" role="button">Cerrar sesión
                     <i class="fas fa-power-off"></i></a>
             </li>
         </ul>
@@ -68,7 +67,7 @@
                     <img src="../uploads/photos/<?=$_SESSION['photo']?>" class="img-circle elevation-2" alt="">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block"><?= $_SESSION['username'] ?></a>
+                    <a href="<?=base_url.'users/myAccountInfo'?>" class="d-block"><?= $_SESSION['username'] ?></a>
                 </div>
             </div>
 
@@ -99,7 +98,14 @@
                             <i class="nav-icon fas fa-users"></i>
                             <p>Horarios</p>
                         </a>
-                    </li><!--
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url . 'sections/index'?>" class="nav-link">
+                            <i class="nav-icon fab fa-simplybuilt"></i>
+                            <p>Secciones</p>
+                        </a>
+                    </li>
+                    <!--
                     <li class="nav-item">
                         <a href="../widgets.html" class="nav-link">
                             <i class="nav-icon fas fa-bullhorn"></i>
@@ -108,7 +114,7 @@
                     </li>-->
                     <li class="nav-item">
                         <a href="<?=base_url.'tutorials/statistic'?>" class="nav-link">
-                            <i class="fas fa-chart-bar"></i>
+                            <i class="nav-icon fas fa-chart-bar"></i>
                             <p>Análisis</p>
                         </a>
                     </li>
@@ -120,7 +126,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url . 'institution/index'?>" class="nav-link">
-                            <i class="fas fa-university"></i>
+                            <i class="nav-icon fas fa-university"></i>
                             <p> Mi Institucion</p>
                         </a>
                     </li>

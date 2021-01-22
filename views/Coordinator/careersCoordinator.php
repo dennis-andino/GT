@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <?php
-                if(isset($_SESSION['listcourses']) && isset($_SESSION['careername'])){?>
+                if(isset($_SESSION['asignatures']) && isset($_SESSION['careername'])){?>
                 <div class="col-lg-3">
                     <div class="card card-warning card-outline">
                         <div class="card-header">
@@ -93,7 +93,7 @@
                     </thead>
                     <tbody>
                             <?php
-                            foreach ($_SESSION['listcourses'] as $course) {?>
+                            foreach ($_SESSION['asignatures'] as $course) {?>
                                 <tr>
                                     <td><?= $course ['id'] ?></td>
                                     <td><span id="coursename<?=$course ['id']?>"><?=$course ['coursename'] ?></span></td>
@@ -108,6 +108,7 @@
                     </div>
                 </div>
                 <?php
+                  unset($_SESSION['asignatures']);
                 }
                 ?>
                 <!-- /.col-md-6 -->

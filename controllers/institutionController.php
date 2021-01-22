@@ -5,6 +5,7 @@ class institutionController
 {
     public function index()
     {
+        Utils::sessionOff(); //verifica si existe una sesion valida.
         try {
             $instituteObject = new Institution();
             $information = $instituteObject->getInfo()->fetch_object();
@@ -33,49 +34,68 @@ class institutionController
 
     public function edit()
     {
-        if (isset($_POST['name']) && isset($_POST['telephone'])) {
-            $instituteObject = new Institution();
-            $instituteObject->setId(1);
-            $instituteObject->setName($_POST['name']);
-            $instituteObject->setVision($_POST['vision']);
-            $instituteObject->setMision($_POST['mision']);
-            $instituteObject->setAddress($_POST['address']);
-            $instituteObject->setTelefone($_POST['telephone']);
-            $instituteObject->setEmail($_POST['email']);
-            if ($instituteObject->updateInfo()) {
-                $this->index();
+        try{
+            if (isset($_POST['name']) && isset($_POST['telephone'])) {
+                $instituteObject = new Institution();
+                $instituteObject->setId(1);
+                $instituteObject->setName($_POST['name']);
+                $instituteObject->setVision($_POST['vision']);
+                $instituteObject->setMision($_POST['mision']);
+                $instituteObject->setAddress($_POST['address']);
+                $instituteObject->setTelefone($_POST['telephone']);
+                $instituteObject->setEmail($_POST['email']);
+                if ($instituteObject->updateInfo()) {
+                    $_SESSION['alert'] = array("title" => "Informacion actualizada", "msj" => " Se ha actualizado su informacion satisfactoriamente .", "type" => "success");
+                }else{
+                    $_SESSION['alert'] = array("title" => "Upps !", "msj" => "Algo salio mal, no pudimos actualizar  la informacion.", "type" => "error");
+                }
             }
+        }catch (Exception $e){
+            $_SESSION['alert'] = array("title" => "Upps !", "msj" => "Algo salio mal, no pudimos actualizar  la informacion.", "type" => "error");
+        } finally {
+            header('Location:'.base_url.'institution/index');
         }
+
     }
 
     public function changeLogo()
     {
-        if (isset($_FILES['logo'])) {
-            $file = $_FILES['logo'];
-            $filename = $file['name'];
-            $mimetype = $file['type'];
-            if ($mimetype == 'image/png' || $mimetype == 'image/jpg' || $mimetype == 'image/jpeg') {
-                $inst = new Institution();
-                $inst->setId(1);
-                $inst->setLogo($filename);
-                if (!is_dir('assets/img')) {
-                    mkdir('assets/img', 0777, true);
-                }
-                if ($inst->updateLogo()) {
-
-                    move_uploaded_file($file['tmp_name'], 'assets/img/' . $filename);
-                    $_SESSION['changeLogo'] = true;
+        try {
+            if (isset($_FILES['logo'])) {
+                $file = $_FILES['logo'];
+                $filename = $file['name'];
+                $mimetype = $file['type'];
+                if ($mimetype == 'image/png' || $mimetype == 'image/jpg' || $mimetype == 'image/jpeg') {
+                    $inst = new Institution();
+                    $inst->setId(1);
+                    $inst->setLogo($filename);
+                    if (!is_dir('assets/img')) {
+                        mkdir('assets/img', 0777, true);
+                    }
+                    if ($inst->updateLogo()) {
+                        if (move_uploaded_file($file['tmp_name'], 'assets/img/' . $filename)){
+                            $_SESSION['logo']=$filename;
+                            $_SESSION['alert'] = array("title" => "Logo actualizado", "msj" => " Se ha actualizado su informacion satisfactoriamente .", "type" => "success");
+                        }else{
+                            $inst->setLogo($_SESSION['logo']);
+                            $inst->updateLogo();
+                        }
+                        } else {
+                        $_SESSION['alert'] = array("title" => "Upps !", "msj" => "Algo salio mal, no pudimos actualizar  la informacion.", "type" => "error");
+                    }
                 } else {
-                    $_SESSION['changeLogo'] = 'Error al cargar imagen';
-                    echo 'Error al cargar imagen';
+                    $_SESSION['changeLogo'] = false;
+                    $_SESSION['alert'] = array("title" => "Formato de imagen incorrecto", "msj" => "Algo salio mal, no pudimos actualizar  la informacion.", "type" => "error");
                 }
-            } else {
-                $_SESSION['changeLogo'] = false;
-                echo 'Error al cargar imagen2';
-            }
 
+            }
+        }catch (Exception $e){
+            $_SESSION['alert'] = array("title" => "Upps !", "msj" => "Algo salio mal, no pudimos actualizar  la informacion.", "type" => "error");
+        } finally {
+            header('Location:'.base_url.'institution/index');
         }
-        $this->index();
+
+
     }
 
 

@@ -151,9 +151,9 @@
                                         <tr>
                                                 <th scope="row">Seccion:</th>
                                                 <td colspan="3"><?php if ($_SESSION['tutoria']['modality'] == 0): ?>
-                                                    <?= $_SESSION['tutoria']->space ?>
+                                                    <?= $_SESSION['tutoria']['space'] ?>
                                                 <?php else: ?>
-                                                        <a href="<?= $_SESSION['tutoria']['space'] ?>"><strong>Aula Virtual</strong></a>
+                                                        <a href="<?= $_SESSION['tutoria']['space'] ?>" target="_blank"><strong>Aula Virtual</strong></a>
                                                 <?php endif;?>
                                                     </td>
                                                     </tr>
@@ -170,7 +170,7 @@
                                         <?php if($_SESSION['tutoria']['filename']!='0'):?>
                                         <tr>
                                             <th scope="row">Adjuntos:</th>
-                                            <td colspan="3"><a href="../uploads/documents/<?=$_SESSION['tutoria']['filename']?>" class="badge badge-light"><?= $_SESSION['tutoria']->filename ?></a></td>
+                                            <td colspan="3"><a href="../uploads/documents/<?=$_SESSION['tutoria']['filename']?>" class="badge badge-light"><?= $_SESSION['tutoria']['filename'] ?></a></td>
                                         </tr>
                                         <?php endif;?>
                                         </tbody>

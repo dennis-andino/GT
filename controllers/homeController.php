@@ -50,7 +50,7 @@ class homeController
                 } elseif ($_SESSION['baseon'] == 'Sys') {
                     header("Location:" . base_url . "home/sys");
                 }else{
-                   self::logout();
+                   Self::logout();
                 }
             } else {
                 $_SESSION['loginstate']=array('tipo'=>'error','msj'=>'Usuario o contraseña Incorrecta! </br>Intentelo nuevamente !');
@@ -62,6 +62,7 @@ class homeController
 
     public static function student()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try {
             require_once 'models/Tutorials.php';
             $nextutoials = new Tutorials();
@@ -78,7 +79,7 @@ class homeController
                 $_SESSION['panel'] = 'mainStudent';
                 require_once 'views/Student/homeStudent.php';
             } else {
-                self::logout();
+                Self::logout();
             }
         }catch (Exception $e){
             $_SESSION['panel'] = 'errorInk';
@@ -91,13 +92,14 @@ class homeController
 
     public static function coordinator()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try{
             if ($_SESSION['baseon'] == 'Coordinator') {
                 require_once 'models/Tutorials.php';
                 $tutorial_object = new Tutorials();
                 $tutorials = $tutorial_object->getAllTutorials();
             } else {
-                self::logout();
+                Self::logout();
             }
         }catch (Exception $e){
             $_SESSION['panel'] = 'errorInk';
@@ -109,6 +111,7 @@ class homeController
 
     public static function tutor()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try {
             if ($_SESSION['baseon'] == 'Tutor') {
                 require_once 'models/Tutorials.php';
@@ -116,7 +119,7 @@ class homeController
                 $tutorials = $tutorial_object->getTutByTutor((int)$_SESSION['id']);
                 $_SESSION['panel']='mainTutor';
             } else {
-                self::logout();
+                Self::logout();
             }
         }catch (Exception $e){
             $_SESSION['panel']='errorInk';
@@ -132,6 +135,7 @@ class homeController
 
     public static function sys()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         databaseController::backupList();
     }
 
@@ -173,12 +177,14 @@ class homeController
     public static function logout()
     {
         if (isset($_SESSION)) {
-            $_SESSION=array();
+            unset($_SESSION['id']);
+            $_SESSION = array();
             session_unset();
             session_destroy();
-            $_SESSION['logout']=true;
-            header("Location:" . base_url);
+            Utils::sessionOff();
         }
     }
+
+
 
 }

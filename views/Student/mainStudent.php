@@ -151,9 +151,6 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<?php if(isset($_SESSION['alert'])):?>
-    <script> swal("<?=$_SESSION['alert']['title']?>","<?=$_SESSION['alert']['msj']?>","<?=$_SESSION['alert']['type']?>");</script>
-<?php unset($_SESSION['alert']); endif; ?>
 <script>
     $(document).ready(function () {
         $("#asignatura").change(function () {

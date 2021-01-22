@@ -1,7 +1,6 @@
-<?php if(isset($_SESSION['logout'])){
-    session_destroy();
-    header('Location:'.base_url.'home/logout');
-} ?>
+<?php
+Utils::sessionOff(); // verifica si existe una sesion valida.
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +12,7 @@
     ?>
     <title>Gestion de tutorias</title>
 </head>
-<body class="hold-transition sidebar-mini sidebar-collapse">
+<body class="hold-transition sidebar-mini sidebar-collapse" onload="noback();">
 <div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark navbar-navy">
@@ -53,7 +52,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?=base_url?>home/logout" role="button">
+                <a class="nav-link" href="<?=base_url?>home/logout" role="button"> Cerrar sesión
                     <i class="fas fa-power-off"></i></a>
             </li>
         </ul>
@@ -125,15 +124,11 @@
         <!-- /.sidebar -->
         <!-- /.sidebar -->
     </aside>
-
     <!-- inicio Panel-->
-
     <?php
     require_once 'views/Student/'.$_SESSION['panel'].'.php'
     ?>
     <!-- Final Panel-->
-
-
     <!-- Main Footer -->
     <?php
     include_once 'views/layouts/footer.php';
@@ -153,6 +148,9 @@
         });
     });
 </script>
+<?php if(isset($_SESSION['alert'])):?>
+    <script> swal("<?=$_SESSION['alert']['title']?>","<?=$_SESSION['alert']['msj']?>","<?=$_SESSION['alert']['type']?>");</script>
+    <?php unset($_SESSION['alert']); endif; ?>
 </body>
 </html>
 

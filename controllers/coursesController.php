@@ -6,10 +6,20 @@ class coursesController
 
     public function index()
     {
-        $coursesObj = new Courses();
-        $listCareers = $coursesObj->getTotalcoursesByCareer();
-        $_SESSION['panel'] = 'careersCoordinator';
-        require_once 'views/Coordinator/homeCoordinator.php';
+        Utils::sessionOff(); // verifica si existe una sesion valida.
+        try{
+            $coursesObj = new Courses();
+            $listCareers = $coursesObj->getTotalcoursesByCareer();
+            if($listCareers){
+                $_SESSION['panel'] = 'careersCoordinator';
+            }else{
+                $_SESSION['panel'] = 'errorInk';
+            }
+        }catch (Exception $e){
+            $_SESSION['panel'] = 'errorInk';
+        } finally {
+            require_once 'views/Coordinator/homeCoordinator.php';
+        }
     }
 
 
@@ -17,18 +27,16 @@ class coursesController
     {
         try {
                 if (isset($_POST['idcareer']) && isset($_POST['careername'])) {
-                    if (!isset($_SESSION['idcareer']) || ($_POST['idcareer'] != $_SESSION['idcareer'])) {
                         $coursesObj = new Courses();
                         $coursesObj->setCareer((int)$_POST['idcareer']);
                         $asignatures = $coursesObj->getAsignaturesByCareer()->fetch_all(MYSQLI_ASSOC);
                         if ($asignatures) {
-                            $_SESSION['listcourses'] = $asignatures;
-                        } else {
+                            $_SESSION['asignatures']=$asignatures;
+                            $_SESSION['careername'] = $_POST['careername'];
+                            $_SESSION['idcareer'] = $_POST['idcareer'];
+                        }else{
                             $_SESSION['alert'] = array("title" => "Upps :(", "msj" => "Experimentamos problemas al obtener los datos, intentalo nuevamente..!", "type" => "error");
                         }
-                        $_SESSION['careername'] = $_POST['careername'];
-                        $_SESSION['idcareer'] = $_POST['idcareer'];
-                    }
                 } else {
                     $_SESSION['alert'] = array("title" => "Upps :(", "msj" => "Experimentamos problemas al obtener los datos, intentalo nuevamente..!", "type" => "error");
                 }
@@ -63,7 +71,12 @@ class coursesController
         } catch (Exception $e) {
             $_SESSION['alert'] = array("title" => "Algo anda mal !", "msj" => "No pudimos actualizar el nombre del curso, estamos trabajando para arreglarlo. !", "type" => "error");
         } finally {
-            header('Location:' . base_url . 'courses/index');
+            $_POST['careername']=$_SESSION['careername'];
+            $_POST['idcareer']=$_SESSION['idcareer'] ;
+            //header('Location:' . base_url . 'courses/index');
+          // header('Location:' . base_url . 'courses/getCoursesByCareer');
+            self::getCoursesByCareer();
+
         }
     }
 
@@ -73,9 +86,10 @@ class coursesController
             if (isset($_POST['careerid']) && isset($_POST['car_name'])) {
                 require_once 'models/Careers.php';
                 $career = new Careers();
-                $career->setId($_POST['careerid']);
+                $career->setId((int)$_POST['careerid']);
                 $career->setName($_POST['car_name']);
                 if ($career->update()) {
+                    $_SESSION['careername']=$_POST['car_name'];
                     $_SESSION['alert'] = array("title" => "Nombre de carrera actualizado", "msj" => "Se actualizo satisfactoriamente el nombre de carrera !", "type" => "success");
                 } else {
                     $_SESSION['alert'] = array("title" => "Upps :(", "msj" => "Experimentamos problemas al intentar actualizar el nombre, intentalo de nuevo.!", "type" => "warning");
@@ -119,7 +133,11 @@ class coursesController
             //problemas en tiempo de ejecucion
             $_SESSION['alert'] = array("title" => "Algo anda mal :( ", "msj" => "tuvimos problemas al intentar crear el nuevo curso, estamos trabajando para arreglarlo!", "type" => "error");
         } finally {
-            header('Location:' . base_url . 'courses/index');
+            //header('Location:' . base_url . 'courses/index');
+            $_POST['careername']=$_SESSION['careername'];
+            $_POST['idcareer']=$_SESSION['idcareer'] ;
+          self::getCoursesByCareer();
+
         }
     }
 
@@ -141,7 +159,7 @@ class coursesController
         } catch (Exception $e) {
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al agregar la informacion, intentalo de nuevo !", "type" => "error");
         } finally {
-            header('Location:' . base_url . 'courses/getAllCareers');
+            header('Location:' . base_url . 'courses/index');
         }
 
     }

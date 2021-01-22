@@ -5,6 +5,7 @@ class scheduleController
 {
     public function index()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try {
             if ($_SESSION['baseon'] == 'Coordinator') {
                 require_once 'models/Campus.php';
@@ -23,7 +24,7 @@ class scheduleController
                     $_SESSION['panel'] = 'errorInk';
                 }
             } else {
-                logout();
+                homeController::logout();
             }
         } catch (Exception $e) {
             $_SESSION['panel'] = 'errorInk';
@@ -34,6 +35,7 @@ class scheduleController
 
     public function tutors()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try {
             if ($_SESSION['baseon'] == 'Tutor') {
                 $scheduleObject = new Schedules();
@@ -55,12 +57,13 @@ class scheduleController
             if (isset($_POST)) {
                 unset($_POST);
             }
-            require_once 'views\Tutor\homeTutor.php';
+            require_once 'views/Tutor/homeTutor.php';
         }
     }
 
     public function create()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try {
             if (isset($_POST['starttime']) && isset($_POST['finishtime'])) {
                 $scheduleObject = new Schedules();
@@ -83,6 +86,7 @@ class scheduleController
 
     public function createScheBytut()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try {
             if (isset($_POST['horas']) && isset($_POST['tutors'])) {
                 $Schedule = new Schedules();
@@ -101,7 +105,8 @@ class scheduleController
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al intentar crear el horario, Verifica la informacion e intentalo nuevamente!", "type" => "error");
         } finally {
             if ($_SESSION['baseon'] == 'Coordinator') {
-                self::index();
+                //self::index();
+                header('Location: '.base_url.'schedule/index');
             } else if ($_SESSION['baseon'] == 'Tutor') {
                 header("Location: " . base_url . 'schedule/tutors');
             } else {
@@ -113,6 +118,7 @@ class scheduleController
 
     public function deleteScheByTut()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try {
             if (isset($_POST['idschedelete'])) {
                 $Schedule = new Schedules();
@@ -127,7 +133,8 @@ class scheduleController
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al intentar eliminar el horario, intentalo nuevamente!", "type" => "error");
         } finally {
             if ($_SESSION['baseon'] == 'Coordinator') {
-                self::index();
+                //self::index();
+                header('Location: '.base_url.'schedule/index');
             } elseif ($_SESSION['baseon'] == 'Tutor') {
                 header("Location: " . base_url . 'schedule/tutors');
             } else {
@@ -202,6 +209,7 @@ class scheduleController
 
     public function actSchedByTut()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try {
             if (isset($_POST['idschedoff']) && isset($_POST['action'])) {
                 $schedule = new Schedules();
@@ -219,7 +227,8 @@ class scheduleController
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al intentar cambiar el estado del horario, Verifica la informacion e intentalo nuevamente!", "type" => "error");
         } finally {
             if ($_SESSION['baseon'] == 'Coordinator') {
-                $this->index();
+                //$this->index();
+                header("Location: " . base_url . 'schedule/index');
             } elseif ($_SESSION['baseon'] == 'Tutor') {
                 header("Location: " . base_url . 'schedule/tutors');
             } else {

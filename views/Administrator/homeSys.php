@@ -1,7 +1,6 @@
-<?php if(isset($_SESSION['logout'])){
-    session_destroy();
-    header('Location:'.base_url.'home/logout');
-} ?>
+<?php
+Utils::sessionOff(); // verifica si existe una sesion valida.
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,7 +44,7 @@
                 </div>
             </li>-->
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url ?>home/logout" role="button">
+                <a class="nav-link" href="<?= base_url ?>home/logout" role="button">Cerrar sesión
                     <i class="fas fa-power-off"></i></a>
             </li>
         </ul>
@@ -68,7 +67,7 @@
                     <img src="../uploads/photos/<?=$_SESSION['photo']?>" class="img-circle elevation-2" alt="">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block"><?= $_SESSION['username'] ?></a>
+                    <a href="<?=base_url.'users/myAccountInfo'?>" class="d-block"><?= $_SESSION['username'] ?></a>
                 </div>
             </div>
 
@@ -172,7 +171,7 @@
 <script>
     $(document).ready(function () {
         $('#tutoriastbl').DataTable({
-            "ordering": true,
+            "ordering": false,
             "responsive": true,
             "autoWidth": false,
             "language": {

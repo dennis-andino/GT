@@ -6,6 +6,7 @@ class tutorialsController
 {
     public function statistic()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         $tutorias = new Tutorials();
         $asignaturas = $tutorias->getFrecuencyCourses();
         $periods = $tutorias->getFrecuencybyPeriod();
@@ -38,8 +39,6 @@ class tutorialsController
             $evaluation .= '{name:' . "'$value->evaluation'" . ',y:' . $value->total . '},';
         }
         $evaluation = substr($evaluation, 0, -1);
-
-
         $_SESSION['panel'] = 'statistiCoordinator';
         require_once 'views/Coordinator/homeCoordinator.php';
     }
@@ -123,7 +122,7 @@ class tutorialsController
                     if (($_SESSION['tutoria']['status'] == -1 || $_SESSION['tutoria']['status'] == 1) && !isset($_SESSION['asignatures'])) {
                         require_once 'models/Courses.php';
                         $courses_object = new Courses();
-                        $_SESSION['asignatures'] = $courses_object->getCoursesByTutorial((int)$_SESSION['tutoria']->id)->fetch_all(MYSQLI_ASSOC);
+                        $_SESSION['asignatures'] = $courses_object->getCoursesByTutorial((int)$_SESSION['tutoria']['id'])->fetch_all(MYSQLI_ASSOC);
                         if ($_SESSION['tutoria']['modality'] == 0) {
                             require_once 'models/Sections.php';
                             $sectionObject = new Sections();
@@ -132,7 +131,7 @@ class tutorialsController
                     }
                     header('Location:'.base_url.'home/coordinator');
                 } else {
-                    $this->logout();
+                   homeController::logout();
                 }
 
             }
@@ -155,11 +154,13 @@ class tutorialsController
                 $_SESSION['alert'] = array("title" => "Upps !!", "msj" => " Tuvimos problemas al integrarlo, porfavor contacte al coordinador del departamento de tutorias.", "type" => "error");
             }
         }
-        homeController::student();
+        //homeController::student();
+        header('Location:'.base_url.'home/student');
     }
 
     public function historicStudent()
     {
+        Utils::sessionOff(); // verifica si existe una sesion valida.
         try {
             $objtutorials = new Tutorials();
             $objtutorials->setPetitioner((int)$_SESSION['id']);
@@ -247,6 +248,7 @@ class tutorialsController
         } catch (Exception $e) {
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "No pudimos eliminar la solicitud , la informacion no fue modificada.", "type" => "error");
         } finally {
+            unset($_SESSION['tutoria']);
             header("Location: " . base_url . 'home/Coordinator');
         }
 
@@ -281,7 +283,7 @@ class tutorialsController
                 $tutoria = new Tutorials();
                 $tutoria->setId((int)$_POST['idtutorial']);
                 if ($tutoria->startTutorial()) {
-                    $_SESSION['tutoria']->status = 0;
+                    $_SESSION['tutoria']['status'] = 0;
                     $_SESSION['alert'] = array("title" => "Tutoria iniciada", "msj" => " Buena suerte con su tutoria !", "type" => "success");
                 }
             } else {
@@ -290,7 +292,8 @@ class tutorialsController
         } catch (Exception $e) {
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al intentar iniciar la tutoria, intentalo de nuevo !", "type" => "error");
         } finally {
-            homeController::tutor();
+            //homeController::tutor();
+            header('Location:'.base_url.'home/tutor');
         }
 
 
@@ -302,11 +305,11 @@ class tutorialsController
             $tutoria = new Tutorials();
             $tutoria->setId((int)$_POST['idtutorial']);
             if ($tutoria->stopTutorial()) {
-                $_SESSION['tutoria']->status = 2;
+                $_SESSION['tutoria'] ['status'] = 2;
                 $_SESSION['alert'] = array("title" => "Tutoria finalizada", "msj" => "La tutoria se ha finalizado satisfactoriamente.", "type" => "warning");
             }
         }
-        homeController::tutor();
+        header('Location:'.base_url.'home/tutor');
     }
 
     public function tutorEvaluations()
@@ -347,7 +350,8 @@ class tutorialsController
         } catch (Exception $e) {
             $_SESSION['panel'] = 'errorInk';
         } finally {
-            self::historicStudent();
+            //self::historicStudent();
+            header('Location:'.base_url.'tutorials/historicStudent');
         }
 
 

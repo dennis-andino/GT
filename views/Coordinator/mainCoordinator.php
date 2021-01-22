@@ -293,19 +293,19 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Agregar <?=$_SESSION['tutoria']->modality==0?'Aula':'Enlace'?></h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Agregar <?=$_SESSION['tutoria'] ['modality']==0?'Aula':'Enlace'?></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <form action="<?=base_url . 'tutorials/approve'?>" method="POST">
-                            <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $_SESSION['tutoria']->id ?>">
+                            <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $_SESSION['tutoria']['id'] ?>">
                             <input type="hidden" id="coordinator" name="coordinator" value="<?=$_SESSION['id']?>">
                             <input type="hidden" id="action" name="action" value="1"> <!-- Aprobacion -->
                             <div class="form-group">
                                 <?php
-                                if($_SESSION['tutoria']->modality==0){ ?>
+                                if($_SESSION['tutoria'] ['modality']==0){ ?>
                                     <select id="section" name="section" class="form-control form-control-sm" required>
                                         <option value="" selected>Seleccionar una seccion</option>
                                         <?php
@@ -344,7 +344,7 @@
                     </div>
                     <div class="modal-body">
                         <form action="<?=base_url .'tutorials/approve'?>" method="POST">
-                            <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $_SESSION['tutoria']->id ?>">
+                            <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $_SESSION['tutoria']['id'] ?>">
                             <input type="hidden" id="coordinator" name="coordinator" value="<?=$_SESSION['id']?>">
                             <input type="hidden" id="action" name="action" value="3"><!-- desaprobacion -->
                             <div class="form-group">
@@ -363,8 +363,8 @@
         <?php
         } ?>
     </div>
-    <!-- /.row -->
 </div>
+    <!-- /.row -->
 <script>
     $(document).ready(function () {
         $("#asignatura").change(function () {

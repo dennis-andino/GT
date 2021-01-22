@@ -109,14 +109,10 @@
                                 <td>
                                     <?php
                                     if($sched->availability==1){?>
-                                       <form action="" method="post">
-                                           <button type="submit" class="btn btn-danger btn-sm">Inhabilitar</button>
-                                       </form>
+                                        <span class="badge bg-success">Activo</span>
                                             <?php
                                     }else{?>
-                                        <form action="" method="post">
-                                            <button type="submit" class="btn btn-success btn-sm">Habilitar</button>
-                                        </form>
+                                        <span class="badge bg-warning">No activo</span>
                                             <?php
                                     }
                                     ?>
@@ -145,39 +141,33 @@
                             </thead>
                             <tbody>
                             <?php
-                            if(isset($tutorials)){
-                                while ($tutoria =$tutorials->fetch_object()){?>
+                            if(isset($tutorials) && $tutorials){
+                                while ($tutoria =$tutorials->fetch_assoc()){?>
                             <tr>
-<td><?=$tutoria->id?></td>
-<td><?=$tutoria->coursename?></td>
-<td><?=$tutoria->schedule?></td>
+<td><?=$tutoria['id']?></td>
+<td><?=$tutoria ['coursename']?></td>
+<td><?=$tutoria ['schedule']?></td>
                                 <td>
-                                    <form action="<?= base_url . 'tutorials/getinfo' ?>" method="POST" style="display: inline-block;">
-                                        <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $tutoria->id ?>">
                                     <?php
-                                    if($tutoria->status==-1){ ?><!-- -1 pendiente , 0 en proceso, 1 aprobado/programada ,2 finalizado,3 denegado -->
-                                        <button type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Pendiente de aprobacion"><i class="fas fa-hourglass-end"></i></button>
-                                    <?php
-                                    }elseif($tutoria->status==1){?><!-- programada -->
-                                        <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Programada"><i class="far fa-clock"></i></button>
-                                    <?php
-                                    }elseif($tutoria->status==0){ ?> <!-- en progreso -->
-                                        <button class="btn btn-success btn-sm " data-toggle="tooltip" data-placement="top" title="Ahora mismo en proceso">
-                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                        </button>
-                                    <?php
-                                    }elseif ($tutoria->status==2){ ?><!-- en finalizada -->
-                                        <button type="submit" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoria Finalizada"><i class="fas fa-check-double"></i></button>
-                                    <?php
-                                    }else{ ?><!-- Denegada -->
-                                        <button type="submit" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoria Denegada"><i class="fas fa-ban"></i></button>
-                                    </form>
+                                    if($tutoria['status']==-1){
+                                        $buttonTitle='Necesita aprobacion';
+                                        $buttonClass='badge bg-info';
+                                    }elseif ($tutoria['status']==0){
+                                        $buttonTitle='En proceso';
+                                        $buttonClass='badge bg-warning';
+                                    }elseif ($tutoria['status']==1){
+                                        $buttonTitle='Aprobada';
+                                        $buttonClass='badge bg-success';
+                                    }elseif ($tutoria['status']==2){
+                                        $buttonTitle='Finalizada';
+                                        $buttonClass='badge bg-secondary';
+                                    }else{
+                                        $buttonTitle='Cancelada';
+                                        $buttonClass='badge bg-danger';
+                                    }
+                                    ?>
+                                    <span class="badge <?=$buttonClass?>"><?=$buttonTitle?></span>
                                 </td>
-                                <?php
-                                }
-                                ?>
-
-</td>
                             </tr>
                                     <?php
                                 }
@@ -202,36 +192,39 @@
                                 $commentnumber=$comments->num_rows;
                             }
                             $scoretotal=0;
-                            while ($comment = $comments->fetch_object()){
-                                if($position){?>
-                                    <div class="direct-chat-msg">
-                                        <!-- /.direct-chat-infos -->
-                                        <i class="fab fa-snapchat"></i>
-                                        <!-- /.direct-chat-img -->
-                                        <div class="direct-chat-text">
-                                            <?php echo $comment->stucomment;
-                                            $scoretotal+=$comment->score;
-                                            ?>
+                            while ($comment = $comments->fetch_object()) {
+                                if(!empty($comment->stucomment)){
+                                    if($position){?>
+                                        <div class="direct-chat-msg">
+                                            <!-- /.direct-chat-infos -->
+                                            <i class="fab fa-snapchat"></i>
+                                            <!-- /.direct-chat-img -->
+                                            <div class="direct-chat-text">
+                                                <?php
+                                                echo $comment->stucomment;
+                                                $scoretotal+=$comment->score;
+                                                ?>
+                                            </div>
+                                            <!-- /.direct-chat-text -->
                                         </div>
-                                        <!-- /.direct-chat-text -->
-                                    </div>
-                                <?php
-                                    $position=false;
-                                }else{
-                                    $position=true;?>
-                                    <div class="direct-chat-msg right">
-                                        <!-- /.direct-chat-infos -->
-                                        <i class="fab fa-snapchat direct-chat-img"></i>
-                                        <!-- /.direct-chat-img -->
-                                        <div class="direct-chat-text">
-                                            <?php echo $comment->stucomment;
-                                            $scoretotal+=$comment->score;
-                                            ?>
+                                        <?php
+                                        $position=false;
+                                    }else{
+                                        $position=true;?>
+                                        <div class="direct-chat-msg right">
+                                            <!-- /.direct-chat-infos -->
+                                            <i class="fab fa-snapchat direct-chat-img"></i>
+                                            <!-- /.direct-chat-img -->
+                                            <div class="direct-chat-text">
+                                                <?php echo $comment->stucomment;
+                                                $scoretotal+=$comment->score;
+                                                ?>
+                                            </div>
+                                            <!-- /.direct-chat-text -->
                                         </div>
-                                        <!-- /.direct-chat-text -->
-                                    </div>
-                            <?php
+                                        <?php
 
+                                    }
                                 }
                             }
                         }
@@ -241,14 +234,11 @@
                                 <?php
                                 $promedio=round(($scoretotal/$commentnumber));
                                 switch($promedio){
-                                    case 0:
-                                        $evaluation='Malo';
-                                            break;
                                     case 1:
-                                        $evaluation='regular';
+                                        $evaluation='Malo';
                                         break;
                                     case 2:
-                                        $evaluation='Bueno';
+                                        $evaluation='Regular';
                                         break;
                                     case 3:
                                         $evaluation='Muy Bueno';
@@ -257,11 +247,12 @@
                                         $evaluation='Excelente';
                                         break;
                                     default:
-                                        $evaluation='cargando...';
+                                        $evaluation='Sin calificar';
+                                        break;
                                 }
                                 ?>
-                                <button type="button" class="btn btn-info">
-                                    <?=$evaluation.' '?><span class="badge badge-light"><?=$promedio.'/5' ?></span>
+                                <button type="button" class="btn btn-sm btn-info">
+                                    <?=$evaluation.' '?><span class="badge badge-light"><?=(($promedio*100)/4).'/100' ?></span>
                                 </button>
 
                             </div>

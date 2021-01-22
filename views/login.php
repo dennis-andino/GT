@@ -1,20 +1,17 @@
-<script src="<?=base_url?>assets/js/noback.js"></script>
-<?php if(isset($_SESSION['logout'])){unset($_SESSION['logout']);}?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta http-equiv="Expires" content="0" />
-    <meta http-equiv="Pragma" content="no-cache" />
     <meta charset="utf-8">
     <link rel="stylesheet" href="<?=base_url?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/css/login.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/css/alertify.min.css">
+    <script src="<?=base_url?>assets/js/noback.js"></script>
     <script src="<?=base_url?>assets/js/jquery-3.5.1.min.js"></script>
     <script src="<?=base_url?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url?>assets/js/alertify.js"></script>
 	<title>Gestion de tutorias</title>
 </head>
-<body>
+<body onload="noback();">
 	<div class="alineacion">
 <div class="login">
   <h2 class="login-header">Sistema de tutorias</h2>
@@ -84,6 +81,5 @@
             </div>
         </div>
     </div>
-    <?php $_SESSION=array();?>
 </body>
 </html>

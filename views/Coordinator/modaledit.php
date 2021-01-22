@@ -33,7 +33,8 @@
 <div class="form-row">
     <div class="form-group col-md-6">
         <label for="birthdate">Dia de Nacimiento</label>
-        <input type="date" class="form-control form-control-sm" min="1950-01-01" id="birthdate" name="birthdate" value="<?=$userinfo['birthDate']?>" required>
+        <?php $fecha = date('Y-m-d', strtotime($userinfo['birthDate'])); ?>
+        <input type="date" class="form-control form-control-sm" min="1950-01-01" id="birthdate" name="birthdate" value="<?=$fecha?>" required>
     </div>
     <div class="form-group col-md-6">
         <label for="account">Cuenta Institucional</label>
