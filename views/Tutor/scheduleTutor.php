@@ -27,7 +27,7 @@
                             <h5 class="m-0">Programacion de horarios actual</h5>
                         </div>
                         <div class="card-body">
-                            <table id="tutoriastbl" class="table table-bordered table-hover table-sm">
+                            <table id="maintable" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>#</th>

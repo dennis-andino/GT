@@ -106,7 +106,7 @@
                             <h5 class="m-0">Proximas Tutorias</h5>
                         </div>
                         <div class="card-body">
-                            <table id="tutoriastbl" class="table table-bordered table-condensed">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>Asunto</th>

@@ -31,7 +31,7 @@
                             <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#staticBackdrop">Crear Nuevo</button>
                         </div>
                         <div class="card-body">
-                            <table id="tutoriastbl" class="table table-bordered table-hover table-sm">
+                            <table id="maintable" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -54,7 +54,6 @@
                                             <td><?=$user['email']?></td>
                                             <td><?=$user['phone']?></td>
                                             <td>
-
                                             <form action="<?= base_url.'users/userInfo'?>" method="POST" style="display: inline-block;">
                                                 <input type="hidden"  name="iduser" id="iduser" value="<?=$user['id']?>">
                                                 <input type="hidden"  name="role" id="role" value="<?=$user['baseon']?>">

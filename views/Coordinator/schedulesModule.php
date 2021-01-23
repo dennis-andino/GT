@@ -81,7 +81,7 @@
                             </form>
                         </div>
                         <div class="card-body">
-                            <table id="tutoriastbl" class="table table-bordered table-hover table-sm">
+                            <table id="maintable" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -139,7 +139,7 @@
                             <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newGeneralSch"><i class="fas fa-plus-square"></i></button>
                         </div>
                         <div class="card-body">
-                            <table id="tutoriastbl" class="table table-bordered table-hover table-sm">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                 <tr>
                                     <th>#</th>

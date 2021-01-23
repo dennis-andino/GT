@@ -28,7 +28,7 @@
                             <h5 class="m-0">Tutorias Solicitadas</h5>
                         </div>
                         <div class="card-body">
-                            <table id="tutoriastbl" class="table table-bordered table-striped">
+                            <table id="maintable" class="table table-bordered table-hover table-sm">
                                 <thead>
                                 <tr>
                                     <th>Asignatura</th>
@@ -85,7 +85,7 @@
                             <h5 class="m-0">Tutorias como invitado</h5>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered table-sm">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                 <tr>
                                     <th>Asignatura</th>

@@ -28,7 +28,7 @@
                             <h5 class="m-0">Bitacora</h5>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="tutoriastbl" class="table table-hover">
+                            <table id="maintable" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>#</th>

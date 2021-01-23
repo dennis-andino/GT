@@ -164,22 +164,10 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
+<script src="<?=base_url?>views/Scripts/tablesFormats.js"></script>
 <?php if(isset($_SESSION['alert'])):?>
     <script> swal("<?=$_SESSION['alert']['title']?>","<?=$_SESSION['alert']['msj']?>","<?=$_SESSION['alert']['type']?>");</script>
     <?php unset($_SESSION['alert']); endif; ?>
-<script>
-    $(document).ready(function () {
-        $('#tutoriastbl').DataTable({
-            "ordering": false,
-            "responsive": true,
-            "autoWidth": false,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-    });
-</script>
 </body>
 </html>
 

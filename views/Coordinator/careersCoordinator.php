@@ -35,7 +35,7 @@
                             <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newcareer"><i class="fas fa-plus-square"></i> Nueva Carrera</button>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="tutoriastbl" class="table table-hover">
+                            <table id="maintable" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>#</th>

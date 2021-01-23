@@ -114,7 +114,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url . 'institution/index'?>" class="nav-link">
-                            <i class="fas fa-university"></i>
+                            <i class="nav-icon fas fa-university"></i>
                             <p> Mi Institucion</p>
                         </a>
                     </li>
@@ -137,17 +137,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<script>
-    $(document).ready(function () {
-        $('#tutoriastbl').DataTable({
-            "ordering": false,
-            "responsive": true,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-    });
-</script>
+<script src="<?=base_url?>views/Scripts/tablesFormats.js"></script>
 <?php if(isset($_SESSION['alert'])):?>
     <script> swal("<?=$_SESSION['alert']['title']?>","<?=$_SESSION['alert']['msj']?>","<?=$_SESSION['alert']['type']?>");</script>
     <?php unset($_SESSION['alert']); endif; ?>

@@ -86,7 +86,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href="<?= base_url . 'home/Tutor' ?>" class="nav-link">
-                            <i class="fas fa-chalkboard-teacher"></i>
+                            <i class="nav-icon fas fa-chalkboard-teacher"></i>
                             <p>
                                 Tutorias
                             </p>
@@ -126,7 +126,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url . 'institution/index'?>" class="nav-link">
-                            <i class="fas fa-university"></i>
+                            <i class="nav-icon fas fa-university"></i>
                             <p> Mi Institucion</p>
                         </a>
                     </li>
@@ -135,22 +135,6 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
         </div>
         <!-- /.sidebar -->
     </aside>
-
-    <!-- Content Wrapper. Contains page content -->
-    <script>
-        $(document).ready(function () {
-            $("#asignatura").change(function () {
-                $("#asignatura option:selected").each(function () {
-                    id_course = $(this).val();
-                    $.post("<?=base_url?>schedule/getSchedule", {
-                        id_course: id_course
-                    }, function (data) {
-                        $("#horario").html(data);
-                    });
-                });
-            });
-        });
-    </script>
 
     <!-- /.content-wrapper -->
     <?php
@@ -164,15 +148,18 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
+<script src="<?=base_url?>views/Scripts/tablesFormats.js"></script>
 <script>
     $(document).ready(function () {
-        $('#tutoriastbl').DataTable({
-            "ordering": false,
-            "responsive": true,
-            "autoWidth": false,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
+        $("#asignatura").change(function () {
+            $("#asignatura option:selected").each(function () {
+                id_course = $(this).val();
+                $.post("<?=base_url?>schedule/getSchedule", {
+                    id_course: id_course
+                }, function (data) {
+                    $("#horario").html(data);
+                });
+            });
         });
     });
 </script>

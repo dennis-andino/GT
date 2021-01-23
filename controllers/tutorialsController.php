@@ -62,6 +62,7 @@ class tutorialsController
                 if ($exist && mysqli_num_rows($exist) > 0) {
                     $_SESSION['alert'] = array("title" => "Horario no disponible", "msj" => "Upps , El horario solicitado ya esta reservado, elige un horario diferente !", "type" => "error");
                 } else {
+
                     if ($new_tutoria->save()) { //tratamiento de archivos
                         try {
                             if ($_FILES['filename']['name'] != null) {
@@ -90,9 +91,11 @@ class tutorialsController
                         $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al procesar la solicitud, intentalo de nuevo !", "type" => "error");
                     }
                 }
+            }else{
+                $_SESSION['alert'] = array("title" => "Informacion incompleta ", "msj" => "Experimentamos problemas al procesar la solicitud, asegurese de llenar todos los campos requeridos !", "type" => "error");
             }
         }catch (Exception $e){
-            $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al procesar la solicitud, intentalo de nuevo !", "type" => "error");
+            $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas tecnicos , intentalo de nuevo !", "type" => "error");
         } finally {
             header('Location:'.base_url.'home/student');
         }

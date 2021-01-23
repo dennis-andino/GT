@@ -28,7 +28,7 @@
                             <h5 class="m-0">Tutorias programadas</h5>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="tutoriastbl" class="table table-hover">
+                            <table id="maintable" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -99,8 +99,7 @@
                     </div>
                 </div>
                 <!-- /.col-md-6 -->
-                <?php
-                if (isset($_SESSION['tutoria'])){ ?>
+                <?php if(isset($_SESSION['tutoria'])){ ?>
                 <div class="col-lg-5">
                     <div class="card card-primary">
                         <div class="card-header text-left">
@@ -140,7 +139,7 @@
                         </div>
                         <div class="card-body">
                             <div>
-                                <table class="table table-sm">
+                                <table class="table table-bordered table-hover">
                                     <tbody>
                                     <tr>
                                         <th scope="row">Solicitante:</th>
@@ -177,7 +176,7 @@
                                     <?php if($_SESSION['tutoria']['filename']!='0'):?>
                                         <tr>
                                             <th scope="row">Adjuntos:</th>
-                                            <td colspan="3"><a href="../uploads/documents/<?=$_SESSION['tutoria']->filename?>" class="badge badge-light"><?= $_SESSION['tutoria']->filename ?></a></td>
+                                            <td colspan="3"><a href="../uploads/documents/<?=$_SESSION['tutoria']['filename']?>" class="badge badge-light"><?= $_SESSION['tutoria']['filename'] ?></a></td>
                                         </tr>
                                     <?php endif;?>
                                     </tbody>
@@ -287,8 +286,12 @@
                         </div>
                     </div>
                 </div>
+                    <?php
+                } ?>
             </div><!-- /.card -->
         </div>
+    </div>
+</div>
         <div class="modal fade" id="addsection" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -360,10 +363,6 @@
                 </div>
             </div>
         </div>
-        <?php
-        } ?>
-    </div>
-</div>
     <!-- /.row -->
 <script>
     $(document).ready(function () {

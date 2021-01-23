@@ -10,6 +10,11 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
     <?php
     require_once 'core/librerias.php';
     ?>
+    <style>
+        .btn-group, .btn-group-vertical{
+            position: absolute !important;
+        }
+    </style>
     <title>Gestion de tutorias</title>
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse" onload="noback();">
@@ -152,18 +157,7 @@ include_once 'views/layouts/footer.php';
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<script>
-    $(document).ready(function () {
-        $('#tutoriastbl').DataTable({
-            "ordering": false,
-            "responsive": true,
-            "autoWidth": false,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-    });
-</script>
+<script src="<?=base_url?>views/Scripts/tablesFormats.js"></script>
 <?php if(isset($_SESSION['alert'])):?>
     <script> swal("<?=$_SESSION['alert']['title']?>","<?=$_SESSION['alert']['msj']?>","<?=$_SESSION['alert']['type']?>");</script>
     <?php unset($_SESSION['alert']); endif; ?>
