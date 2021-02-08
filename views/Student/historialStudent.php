@@ -25,7 +25,7 @@
                 <div class="col-lg-12">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Tutorias Solicitadas</h5>
+                            <h5 class="m-0">Tutorías Solicitadas</h5>
                         </div>
                         <div class="card-body">
                             <table id="maintable" class="table table-bordered table-hover table-sm">
@@ -34,10 +34,10 @@
                                     <th>Asignatura</th>
                                     <th>Tema</th>
                                     <th>Fecha</th>
-                                    <th>hora</th>
-                                    <th>tutor</th>
-                                    <th>Seccion</th>
-                                    <th>calificar</th>
+                                    <th>Hora</th>
+                                    <th>Tutor</th>
+                                    <th>Sección</th>
+                                    <th>Calificar</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -54,16 +54,16 @@
                                             <?php
                                             if($onetutorial->modalidad=='Presencial'):?>
                                             <td><?=$onetutorial->space?></td>
-                                                <?php elseif($onetutorial->modalidad=='Virtual' && ($onetutorial->status==1 || $onetutorial->status==0)): ?>
+                                                <?php elseif($onetutorial->modalidad=='Virtual' && $onetutorial->status==1): ?>
                                                 <td><a href="<?=$onetutorial->space?>">Aula virtual</a></td>
                                                     <?php else:?>
-                                                <td>Aula Virtual no programada</td>
+                                                <td>Aula Virtual no definida</td>
                                             <?php endif; ?>
                                                 <?php
                                                 if($onetutorial->score==0 && $onetutorial->status==2):?>
                                                     <td><button type="button"  value="<?=$onetutorial->id?>" class="btn btn-block btn-info btn-xs edit">Calificar</button></td>
                                                     <?php elseif ($onetutorial->status==-1):?>
-                                                    <td><span class="btn btn-block btn-secondary btn-xs disabled ">Necesita aprobacion</span></td>
+                                                    <td><span class="btn btn-block btn-secondary btn-xs disabled ">Necesita aprobación</span></td>
                                                 <?php elseif ($onetutorial->status==3):?>
                                                     <td><span class="btn btn-block btn-secondary btn-xs disabled ">Cancelada</span></td>
                                                 <?php else:?>
@@ -82,7 +82,7 @@
                 <div class="col-lg-12">
                     <div class="card card-info card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Tutorias como invitado</h5>
+                            <h5 class="m-0">Tutorías como invitado</h5>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered table-hover table-sm">
@@ -91,10 +91,10 @@
                                     <th>Asignatura</th>
                                     <th>Tema</th>
                                     <th>Fecha</th>
-                                    <th>hora</th>
-                                    <th>tutor</th>
-                                    <th>Seccion</th>
-                                    <th>calificar</th>
+                                    <th>Hora</th>
+                                    <th>Tutor</th>
+                                    <th>Sección</th>
+                                    <th>Calificar</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -110,10 +110,10 @@
                                             <?php
                                             if($onetutorial->modalidad=='Presencial'):?>
                                                 <td><?=$onetutorial->space?></td>
-                                            <?php elseif($onetutorial->modalidad=='Virtual' && ($onetutorial->status==1 || $onetutorial->status==0)): ?>
+                                            <?php elseif($onetutorial->modalidad=='Virtual' && $onetutorial->status==1): ?>
                                                 <td><a href="<?=$onetutorial->space?>">Aula virtual</a></td>
                                             <?php else:?>
-                                                <td>Aula Virtual no programada</td>
+                                                <td>Aula virtual no programada</td>
                                             <?php endif; ?>
                                                 <td><span class="btn btn-block btn-secondary btn-xs disabled ">No permitido</span></td>
                                         </tr>
@@ -139,7 +139,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Calificacion de Tutoria</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Calificación de Tutoría</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -148,7 +148,7 @@
                 <form action="<?=base_url.'tutorials/setScore'?>" method="POST">
                     <input type="hidden" id="idtut" name="idtut">
                     <div class="form-group">
-                        <label for="score">¿Cómo califica la tutoria recibida?</label>
+                        <label for="score">¿Cómo califica la tutoría recibida?</label>
                         <select class="custom-select"  name="score" required>
                             <option value="" selected>Elija una opción</option>
                             <option value="4">Excelente</option>

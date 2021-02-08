@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Gestion de Datos</h1>
+                    <h1 class="m-0 text-dark">Gestión de datos</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,13 +25,13 @@
                 <div class="col">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Gestion de base de datos</h5>
+                            <h5 class="m-0">Gestión de base de datos</h5>
                         </div>
                         <div class="card-header">
                             <form action="<?=base_url.'database/backUp'?>" method="post">
                                 <div class="row">
                                     <div class="form-group col-7"></div>
-                                    <div class="form-group col-3"><input type="text" class="form-control form-control-sm" name="backup_description" placeholder="Descripcion" required></div>
+                                    <div class="form-group col-3"><input type="text" class="form-control form-control-sm" name="backup_description" placeholder="Descripción" required></div>
                                     <div class="form-group col-2"><button type="submit" class="btn btn-warning btn-sm ">Generar respaldo</button></div>
                                 </div>
                             </form>
@@ -43,7 +43,7 @@
                                     <th>#</th>
                                     <th>Fecha</th>
                                     <th>Autor</th>
-                                    <th>Descripcion</th>
+                                    <th>Descripción</th>
                                     <th></th>
                                 </tr>
                                 </thead>

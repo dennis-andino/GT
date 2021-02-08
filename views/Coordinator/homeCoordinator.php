@@ -15,7 +15,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
             position: absolute !important;
         }
     </style>
-    <title>Gestion de tutorias</title>
+    <title>Gestión de tutorías</title>
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse" onload="noback();">
 <div class="wrapper">
@@ -83,7 +83,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                     <li class="nav-item">
                         <a href="<?= base_url . 'home/coordinator'?>" class="nav-link">
                             <i class="nav-icon fas fa-book-reader"></i>
-                            <p>Tutorias</p>
+                            <p>Tutorías</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -126,13 +126,13 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                     <li class="nav-item">
                         <a href="<?=base_url.'users/myAccountInfo'?>" class="nav-link">
                             <i class="nav-icon far fa-address-card"></i>
-                            <p>Mi Cuenta</p>
+                            <p>Mi cuenta</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url . 'institution/index'?>" class="nav-link">
                             <i class="nav-icon fas fa-university"></i>
-                            <p> Mi Institucion</p>
+                            <p>Mi institución</p>
                         </a>
                     </li>
             </nav>

@@ -28,7 +28,7 @@
                             <h5 class="m-0">Gestión de usuarios</h5>
                         </div>
                         <div class="card-header">
-                            <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#staticBackdrop">Crear Nuevo</button>
+                            <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#staticBackdrop">Crear nuevo</button>
                         </div>
                         <div class="card-body">
                             <table id="maintable" class="table table-bordered table-hover">
@@ -37,8 +37,8 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Perfil</th>
-                                    <th>correo</th>
-                                    <th>Telefono</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -98,7 +98,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Nuevo Usuario</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Nuevo usuario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -106,7 +106,7 @@
             <div class="modal-body">
                         <div class="form-row">
                         <div class="form-group col-md-8">
-                            <label for="fullname">Nombre Completo</label>
+                            <label for="fullname">Nombre completo</label>
                             <input type="text" class="form-control form-control-sm" id="fullname" name="fullname" minlength="15" maxlength="50" required>
                         </div>
                             <div class="form-group col-md-4">
@@ -126,27 +126,27 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-8">
-                                <label for="email">Correo</label>
+                                <label for="email">Correo:</label>
                                 <input type="email" class="form-control form-control-sm" id="email" name="email" required>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="phone">Telefono</label>
+                                <label for="phone">Teléfono:</label>
                                 <input type="tel" class="form-control form-control-sm" id="phone" name="phone" minlength="8" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="birthdate">Dia de Nacimiento</label>
+                                <label for="birthdate">Dia de nacimiento:</label>
                                 <input type="date" class="form-control form-control-sm" min="1950-01-01" id="birthdate" name="birthdate" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="campus">Cuenta Institucional</label>
+                                <label for="campus">Cuenta institucional:</label>
                                 <input type="text" class="form-control form-control-sm" id="account" name="account" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="campus">Facultad</label>
+                                <label for="campus">Facultad:</label>
                                 <select id="career" name="career" class="form-control form-control-sm">
                                     <?php
                                     if(isset($_SESSION['careers'])){
@@ -159,7 +159,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="username">Campus</label>
+                                <label for="username">Campus:</label>
                                 <select id="campus" name="campus" class="form-control form-control-sm">
                                     <?php
                                     if(isset($_SESSION['campus'])){
@@ -174,16 +174,16 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="admissiondate">Fecha de ingreso</label>
+                                <label for="admissiondate">Fecha de ingreso:</label>
                                 <input type="date" class="form-control form-control-sm" min="1960-01-01" id="admissiondate" name="admissiondate" required>
                             </div>
                             <div class="form-group  col-md-6">
-                                <label for="username">Usuario</label>
+                                <label for="username">Usuario:</label>
                                 <input type="text" class="form-control form-control-sm" id="username" name="username" minlength="10" maxlength="25" required>
                             </div>
                         </div>
                             <div class="form-group">
-                                <label for="username">Contraseña</label>
+                                <label for="username">Contraseña:</label>
                                 <input type="password" class="form-control form-control-sm " id="pass" name="pass"  minlength="8" maxlength="15" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$" title="La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico." required>
                             </div>
             </div>
@@ -201,7 +201,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Edicion de Usuario</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Edición de usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

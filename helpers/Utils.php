@@ -1,5 +1,10 @@
 <?php
-
+/*
+ * Desarrollado por : DennisM.Andino
+ * Contactame a mi correo : dennis_andino@outlook.com
+ * mi canal de Youtube: CodigoCompartido
+ * proyecto disponible en : https://github.com/dennis-andino/GT
+*/
 
 class Utils
 {

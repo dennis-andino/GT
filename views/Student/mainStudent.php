@@ -25,13 +25,13 @@
                 <div class="col-lg-5">
                     <div class="card card-primary ">
                         <div class="card-header">
-                            <h5 class="m-0">Nueva Solicitud de Tutoria</h5>
+                            <h5 class="m-0">Nueva Solicitud de Tutoría</h5>
                         </div>
                         <div class="card-body">
                             <form action="<?=base_url.'tutorials/save'?>" method="POST" enctype="multipart/form-data">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="subject">Asunto</label>
+                                        <label for="subject">Tema</label>
                                         <input type="text" class="form-control form-control-sm" id="subject" name="subject" placeholder="Razon de la solicitud" maxlength="40" required>
                                     </div>
                                     <div class="row">
@@ -103,16 +103,16 @@
                 <div class="col-lg-7">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Proximas Tutorias</h5>
+                            <h5 class="m-0">Próximas Tutorías</h5>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                 <tr>
                                     <th>Asunto</th>
                                     <th>Asignatura</th>
                                     <th>Dia</th>
-                                    <th>hora</th>
+                                    <th>Hora</th>
                                     <th>Modalidad</th>
                                     <th>Unirme</th>
                                 </tr>

@@ -1,4 +1,11 @@
 <?php
+/*
+ * Desarrollado por : DennisM.Andino
+ * Contactame a mi correo : dennis_andino@outlook.com
+ * mi canal de Youtube: CodigoCompartido
+ * proyecto disponible en : https://github.com/dennis-andino/GT
+*/
+
 session_start();
 require_once 'core/autoload.php';
 require_once 'core/parameters.php';

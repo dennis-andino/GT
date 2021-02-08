@@ -10,7 +10,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
     <?php
     require_once 'core/librerias.php';
     ?>
-    <title>Gestion de tutorias</title>
+    <title>Gestión de tutorías</title>
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse" onload="noback();">
 <div class="wrapper">
@@ -83,39 +83,31 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                     <li class="nav-item">
                         <a href="<?=base_url.'home/student'?>" class="nav-link">
                             <i class="nav-icon far fa-address-card"></i>
-                            <p>
-                               Tutorias
-                            </p>
+                            <p>Tutorías</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?=base_url.'tutorials/historicStudent'?>" class="nav-link">
                             <i class="nav-icon fas fa-book-reader"></i>
-                            <p>
-                                Historial de solicitudes
-                            </p>
+                            <p>Historial de solicitudes</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?=base_url.'notification/seeNotifications'?>" class="nav-link">
                             <i class="nav-icon fas fa-bullhorn"></i>
-                            <p>
-                                Notificaciones
-                            </p>
+                            <p>Notificaciones</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?=base_url.'users/myAccountInfo'?>" class="nav-link">
                             <i class="nav-icon far fa-address-card"></i>
-                            <p>
-                                Mi Cuenta
-                            </p>
+                            <p>Mi Cuenta</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url . 'institution/index'?>" class="nav-link">
                             <i class="nav-icon fas fa-university"></i>
-                            <p> Mi Institucion</p>
+                            <p>Mi Institución</p>
                         </a>
                     </li>
             </nav>

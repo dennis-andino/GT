@@ -68,7 +68,7 @@
                 <div class="col-lg-6">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Comentarios sobre tutorias</h5>
+                            <h5 class="m-0">Comentarios sobre tutorías</h5>
                         </div>
                         <div class="card-body">
                             <div class="direct-chat-messages">
@@ -149,7 +149,7 @@
                 <div class="col-lg-6">
                     <div class="card card-warning card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Grafica de Evaluacion</h5>
+                            <h5 class="m-0">Grafica de Evaluación</h5>
                         </div>
                         <div class="card-body" id="student_evaluation"></div>
                     </div>

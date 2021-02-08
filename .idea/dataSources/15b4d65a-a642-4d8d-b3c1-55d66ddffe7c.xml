@@ -1033,8 +1033,6 @@
     </collation>
     <user id="330" parent="1" name="pma">
       <Host>localhost</Host>
-      <ObjectGrants>SELECT,INSERT,UPDATE,DELETE|phpmyadmin
-</ObjectGrants>
     </user>
     <user id="331" parent="1" name="root">
       <Host>127.0.0.1</Host>

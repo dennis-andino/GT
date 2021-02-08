@@ -216,11 +216,6 @@ class Tutorials
                                          INNER JOIN LOGINS L on ME.student = L.id WHERE ME.tutorial={$this->getId()};");
     }
 
-    public function deleteAmember($onemember)
-    {
-        return $this->connection->query("DELETE FROM MEMBERS_ASSISTANCE WHERE tutorial={$this->getId()} AND student={$onemember};");
-    }
-
     public function getInfoTutorial() //obtiene la informacion de una tutoria
     {
         return $this->connection->query("SELECT id,schedule,studentname,tutorname,coursename,subject,details,reservdate,requestdate,filename,status,score,starttime,finishtime,tutcomment,stucomment,modality,space FROM GETTUTORIALINFO WHERE id={$this->getId()};");
@@ -306,4 +301,14 @@ class Tutorials
     public function setEvaluation(){
         return $this->connection->query("UPDATE TUTORIALS SET score={$this->getScore()}, stucomment='{$this->getStucomment()}' WHERE id={$this->getId()};");
     }
+
+    public function validateSectionState($schedule,$reservdate,$section){
+       return $this->connection->query("SELECT id,subject FROM GETTUTORIALINFO where schedule='{$schedule}' and reservdate='{$reservdate}' and space='{$section}' and status=1;");
+    }
+
+    public function getSchedulebyId(){
+       // var_dump($this->getSchedule());die;
+         return $this->connection->query("select CONCAT(starttime, '-',finishtime) as schedule from vw_schedules where id={$this->getSchedule()} limit 1;");
+    }
+
 }

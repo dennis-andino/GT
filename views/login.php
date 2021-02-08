@@ -14,7 +14,7 @@
 <body onload="noback();">
 	<div class="alineacion">
 <div class="login">
-  <h2 class="login-header">Sistema de tutorias</h2>
+  <h2 class="login-header">Sistema de tutorías</h2>
   <div class="login-container">
   <form action="<?=base_url?>home/login" method="POST">
       <?php
@@ -36,7 +36,7 @@
     <input type="submit" value="Ingresar">
   </form>
       <br>
-  <label>Has olvidado tu clave?<span role="button" class="text-info" data-toggle="modal" data-target="#resetpassword">
+  <label>¿Has olvidado tu clave?<span role="button" class="text-info" data-toggle="modal" data-target="#resetpassword">
          Restablecer
       </span></label>
   </div>

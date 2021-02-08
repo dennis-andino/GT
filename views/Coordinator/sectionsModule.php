@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Gestion de secciones</h1>
+                    <h1 class="m-0 text-dark">Gestión de secciones</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -35,7 +35,7 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Descripcion</th>
+                                    <th>Descripción</th>
                                     <th>Estado</th>
                                 </tr>
                                 </thead>
@@ -61,7 +61,7 @@
                                                 </form>
                                                 <form action="<?=base_url.'sections/delete'?>" method="POST" style="display: inline-block;">
                                                     <input type="hidden" id="idsecdelete" name="idsecdelete" value="<?=$section->id?>">
-                                                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar Seccion"><i class="fas fa-trash-alt"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar sección"><i class="fas fa-trash-alt"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -88,7 +88,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Nueva Seccion</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Nueva sección</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -96,7 +96,7 @@
             <div class="modal-body">
                 <form action="<?=base_url.'sections/create'?>" method="POST">
                         <div class="form-group">
-                            <label for="sectionname">Descripcion de la seccion: </label>
+                            <label for="sectionname">Descripción de la sección: </label>
                             <input type="text" class="form-control" id="sectionname" name="sectionname" placeholder="Ejemplo: Salon 4B-3" required>
                         </div>
             </div>

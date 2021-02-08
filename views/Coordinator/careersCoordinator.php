@@ -29,10 +29,10 @@
                 <div class="col-lg">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Gestion de Carreras</h5>
+                            <h5 class="m-0">Gestión de Carreras</h5>
                         </div>
                         <div class="card-header">
-                            <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newcareer"><i class="fas fa-plus-square"></i> Nueva Carrera</button>
+                            <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newcareer"><i class="fas fa-plus-square"></i> Nueva carrera</button>
                         </div>
                         <div class="card-body table-responsive">
                             <table id="maintable" class="table table-bordered table-hover">
@@ -59,7 +59,7 @@
                                                 <form action="<?= base_url . 'courses/getCoursesByCareer' ?>" method="POST" style="display: inline-block;">
                                                     <input type="hidden" id="idcareer" name="idcareer" value="<?=$career->id?>">
                                                     <input type="hidden" id="careername" name="careername" value="<?=$career->career?>">
-                                                    <button type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="ver Clases"><i class="fas fa-info-circle"></i></button>
+                                                    <button type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Ver clases"><i class="fas fa-info-circle"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -122,7 +122,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Nueva Carrera</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Nueva carrera</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -147,7 +147,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Nueva Asignatura</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Nueva asignatura</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -172,7 +172,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Edicion de Carrera</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Edición de carrera</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -198,7 +198,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Edicion de Asignatura</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Edición de asignatura</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -213,7 +213,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Cambiar Nombre</button>
+                <button type="submit" class="btn btn-primary">Cambiar nombre</button>
             </div>
             </form>
         </div>

@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Institucion</h1>
+                    <h1 class="m-0 text-dark">Institución</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -60,7 +60,7 @@
                     <div class="card card-warning card-outline">
                         <div class="card-body">
                             <div class="md-form">
-                                <label for="vision">Vision</label>
+                                <label for="vision">Visión</label>
                                 <i class="fas fa-pencil-alt prefix"></i>
                                 <textarea id="vision" name="vision" class="md-textarea form-control " rows="3"><?=$information->vision?></textarea>
                             </div>
@@ -71,7 +71,7 @@
                     <div class="card card-warning card-outline">
                         <div class="card-body">
                             <div class="md-form">
-                                <label for="inputPassword4">Mision</label>
+                                <label for="inputPassword4">Misión</label>
                                 <i class="fas fa-pencil-alt prefix"></i>
                                 <textarea id="mision" name="mision" class="md-textarea form-control " rows="3"><?=$information->mission?></textarea>
                             </div>
@@ -84,7 +84,7 @@
                 <div class="card card-secondary card-outline">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="inputPassword4">Direccion</label>
+                            <label for="inputPassword4">Dirección</label>
                             <i class="fas fa-pencil-alt prefix"></i>
                             <input type="text" class="form-control form-control-sm" id="address" name="address" value="<?=$information->address?>" aria-describedby="emailHelp">
                         </div>
@@ -101,7 +101,7 @@
                                 <input type="email" class="form-control form-control-sm" id="email" name="email" value="<?=$information->email?>">
                             </div>
                             <div class="form-group col-md-5">
-                                <label for="inputPassword4">Telefono</label>
+                                <label for="inputPassword4">Teléfono</label>
                                 <i class="fas fa-pencil-alt prefix"></i>
                                 <input type="text" class="form-control form-control-sm" id="telephone" name="telephone" value="<?=$information->telefone?>">
                             </div>

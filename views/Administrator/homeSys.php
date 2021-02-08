@@ -10,7 +10,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
     <?php
     require_once 'core/librerias.php';
     ?>
-    <title>Gestion de Tutorias</title>
+    <title>Gestión de tutorías</title>
 </head>
 <body onload="noback();" class="hold-transition sidebar-mini sidebar-collapse">
 <div class="wrapper">
@@ -82,7 +82,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                         <a href="<?= base_url . 'institution/index'?>" class="nav-link">
                             <i class="fas fa-building"></i>
                             <p>
-                                Institucion
+                                Institución
                             </p>
                         </a>
                     </li>
@@ -122,7 +122,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                         <a href="<?=base_url.'binnacle/statistics'?>" class="nav-link">
                             <i class="fas fa-chart-pie"></i>
                             <p>
-                                Estadisticas
+                                Estadísticas
                             </p>
                         </a>
                     </li>

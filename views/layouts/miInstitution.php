@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Institucion</h1>
+                    <h1 class="m-0 text-dark">Institución</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                        <li class="breadcrumb-item active">Mi institucion</li>
+                        <li class="breadcrumb-item active">Mi institución</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -49,7 +49,7 @@
                     <div class="card card-warning card-outline">
                         <div class="card-body">
                             <div class="md-form">
-                                <label for="vision">Vision</label>
+                                <label for="vision">Visión</label>
                                 <blockquote><?=$information->vision?></blockquote>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                     <div class="card card-warning card-outline">
                         <div class="card-body">
                             <div class="md-form">
-                                <label for="inputPassword4">Mision</label>
+                                <label for="inputPassword4">Misión</label>
                                 <blockquote><?=$information->mission?></blockquote>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                 <div class="card card-secondary card-outline">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="inputPassword4">Direccion</label>
+                            <label for="inputPassword4">Dirección</label>
                             <address><?=$information->address?></address>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                                 <p><?=$information->email?></p>
                             </div>
                             <div class="form-group col-md-5">
-                                <label for="inputPassword4">Telefono</label>
+                                <label for="inputPassword4">Teléfono</label>
                                 <p><?=$information->telefone?></p>
                             </div>
                         </div>

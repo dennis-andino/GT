@@ -49,12 +49,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Estadisticas</h1>
+                    <h1 class="m-0 text-dark">Estadísticas</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                        <li class="breadcrumb-item active">estadisticas</li>
+                        <li class="breadcrumb-item active">Estadísticas</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -90,7 +90,7 @@
     <div class="col-lg-6">
         <div class="card card-success card-outline">
             <div class="card-header">
-                <h5 class="m-0">Evaluacion de Estudiantes</h5>
+                <h5 class="m-0">Evaluación de estudiantes</h5>
             </div>
             <div class="card-body" id="student_evaluation"></div>
         </div>
@@ -160,7 +160,7 @@
             type: 'pie'
         },
         title: {
-            text: 'Evaluacion de la accion tutorial segun Estudiantes'
+            text: 'Evaluación de la acción tutoríal según Estudiantes'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

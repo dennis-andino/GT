@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Horarios de atencion a tutorias</h1>
+                    <h1 class="m-0 text-dark">Horarios de atención a tutorías</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -24,7 +24,7 @@
                 <div class="col-lg-9">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Programacion de horarios actual</h5>
+                            <h5 class="m-0">Programación de horarios actual</h5>
                         </div>
                         <div class="card-body">
                             <table id="maintable" class="table table-bordered table-hover">
@@ -34,7 +34,7 @@
                                     <th>Horario</th>
                                     <th>Asignatura</th>
                                     <th>Tutor</th>
-                                    <th>acciones</th>
+                                    <th>Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -61,7 +61,7 @@
                                                 </form>
                                                 <form action="<?=base_url.'schedule/deleteScheByTut'?>" method="POST" style="display: inline-block;">
                                                     <input type="hidden" id="idschedelete" name="idschedelete" value="<?=$sched->id?>">
-                                                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar Horario"><i class="fas fa-trash-alt"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar horario"><i class="fas fa-trash-alt"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -78,14 +78,14 @@
                 <div class="col-lg-3">
                     <div class="card card-warning card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Programacion de Horarios</h5>
+                            <h5 class="m-0">Programación de horarios</h5>
                         </div>
                         <div class="card-body">
                             <form action="<?=base_url.'schedule/createScheBytut'?>" method="POST">
                                 <input type="hidden" name="tutors" value="<?=$_SESSION['id']?>">
                                     <div class="form-group">
                                         <select class="form-control form-control-sm" style="background: #EBEDEF;" id="horas" name="horas" required>
-                                            <option value="" selected>Seleccionar Horario</option>
+                                            <option value="" selected>Seleccionar horario</option>
                                             <?php
                                             $schedules = $_SESSION['schedules'];
                                             foreach($schedules as $schedule){ ?>
@@ -108,11 +108,11 @@
                                     </div>
                                     <div class="form-group">
                                         <select class="form-control form-control-sm" style="background: #EBEDEF;" id="courses" name="courses" required>
-                                            <option value="" selected>Seleccionar Asignatura</option>
+                                            <option value="" selected>Seleccionar asignatura</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-sm">Agregar programacion</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Agregar programación</button>
                                     </div>
                             </form>
                         </div>

@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Tutorias</h1>
+                    <h1 class="m-0 text-dark">Tutorías</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                        <li class="breadcrumb-item active">Tutorias</li>
+                        <li class="breadcrumb-item active">Tutorías</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -22,26 +22,33 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- /.col-md-6 -->
-                <div class="col-lg">
+                <?php if(!isset($_SESSION['tutoria'])): ?>
+                <div class="col-12">
+                <?php else:?>
+                    <div class="col-7">
+                <?php endif;?>
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Tutorias programadas</h5>
+                            <h5 class="m-0">Tutorías programadas</h5>
+                            <div class="float-right">
+                                <button class="btn btn-info btn-xs"><?=$_SESSION['periodo']?></button>
+                               <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#newPeriod"><i class="fas fa-edit"></i></button>
+                            </div>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="maintable" class="table table-bordered table-hover">
+                            <table id="maintable" class="table table-bordered table-hover table-sm">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Asignatura</th>
                                     <th>Fecha</th>
                                     <th>Hora</th>
-                                    <th>tutor</th>
+                                    <th>Tutor</th>
                                     <th>Ver</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-
                                 if (isset($tutorials)) {
                                     while ($onetutorial = $tutorials->fetch_object()) {
                                         ?>
@@ -56,19 +63,19 @@
                                                 if($onetutorial->status==-1){ ?><!-- -1 pendiente , 0 en proceso, 1 aprobado/programada ,2 finalizado,3 denegado -->
                                                 <form action="<?= base_url . 'tutorials/getinfo' ?>" method="POST" style="display: inline-block;">
                                                     <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $onetutorial->id ?>">
-                                                    <button type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Reprogramar"><i class="fas fa-edit"></i></button>
+                                                    <button type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Pendiente de aprobar"><i class="fas fa-edit"></i></button>
                                                 </form>
                                                 <?php
                                                 }elseif($onetutorial->status==1){?><!-- programada -->
                                                 <form action="<?= base_url . 'tutorials/getinfo' ?>" method="POST" style="display: inline-block;">
                                                     <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $onetutorial->id ?>">
-                                                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Reprogramar"><i class="far fa-clock"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Aprobada"><i class="far fa-clock"></i></button>
                                                 </form>
                                                 <?php
                                                 }elseif($onetutorial->status==0){ ?> <!-- en progreso -->
                                                 <form action="<?= base_url . 'tutorials/getinfo' ?>" method="POST" style="display: inline-block;">
                                                     <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $onetutorial->id ?>">
-                                                    <button class="btn btn-success btn-sm " data-toggle="tooltip" data-placement="top" title="Ahora mismo en proceso">
+                                                    <button class="btn btn-success btn-sm " data-toggle="tooltip" data-placement="top" title="En proceso">
                                                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                                     </button>
                                                 </form>
@@ -76,13 +83,13 @@
                                                 }elseif ($onetutorial->status==2){ ?><!-- en finalizada -->
                                                 <form action="<?= base_url . 'tutorials/getinfo' ?>" method="POST" style="display: inline-block;">
                                                     <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $onetutorial->id ?>">
-                                                    <button type="submit" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoria Finalizada"><i class="fas fa-check-double"></i></button>
+                                                    <button type="submit" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Finalizada"><i class="fas fa-check-double"></i></button>
                                                 </form>
                                                 <?php
                                                 }else{ ?><!-- Cancelada -->
                                                 <form action="<?= base_url . 'tutorials/getinfo' ?>" method="POST" style="display: inline-block;">
                                                     <input type="hidden" id="idtutorial" name="idtutorial" value="<?= $onetutorial->id ?>">
-                                                    <button type="submit" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoria Cancelada"><i class="fas fa-ban"></i></button>
+                                                    <button type="submit" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Cancelada"><i class="fas fa-ban"></i></button>
                                                 </form>
                                             <?php
                                             }
@@ -100,7 +107,7 @@
                 </div>
                 <!-- /.col-md-6 -->
                 <?php if(isset($_SESSION['tutoria'])){ ?>
-                <div class="col-lg-5">
+                <div class="col-md-5">
                     <div class="card card-primary">
                         <div class="card-header text-left">
                             <h5 class="m-0">Solicitud #<?=$_SESSION['tutoria']['id']?> &nbsp;
@@ -129,7 +136,7 @@
                                         <button class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#canceltut"><i class="far fa-window-close"></i></button>
                                         <form action="<?=base_url . 'tutorials/delete'?>" method="POST" style="display: inline-block;">
                                             <input type="hidden" id="idtutdelete" name="idtutdelete" value="<?= $_SESSION['tutoria']['id'] ?>">
-                                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar Tutoria"><i class="fas fa-trash-alt"></i></button>
+                                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar tutoria"><i class="fas fa-trash-alt"></i></button>
                                         </form>
                                         <?php
                                     }
@@ -138,8 +145,8 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <div>
-                                <table class="table table-bordered table-hover">
+                            <div class=" table-responsive">
+                                <table class="table table-sm table-bordered table-responsive">
                                     <tbody>
                                     <tr>
                                         <th scope="row">Solicitante:</th>
@@ -164,7 +171,7 @@
                                         <td colspan="3"><?= $_SESSION['tutoria']['subject'] ?></td>
                                     </tr>
                                     <tr>
-                                        <th scope="row" colspan="4">Descripcion:</th>
+                                        <th scope="row" colspan="4">Descripción:</th>
                                     </tr>
                                     <tr>
                                         <td colspan="4">
@@ -182,18 +189,18 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <table class="table table-bordered table-sm">
+                            <table class="table table-bordered table-sm table-responsive">
                                 <thead>
                                 <tr>
                                     <th colspan="3" style="background-color: #EBF5FB;">
-                                        <div align='center'><h6><strong>Lista de Asistentes</strong></h6>
+                                        <div align='center'><h6><strong>Lista de asistentes</strong></h6>
                                         </div>
                                     </th>
                                 </tr>
                                 <tr>
                                     <th scope="col">Nombre</th>
-                                    <th scope="col">Telefono</th>
-                                    <th scope="col">asistencia</th>
+                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Asistencia</th>
                                 </tr>
                                 </thead>
 
@@ -246,10 +253,10 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Horario :</th>
+                                            <th scope="row">Horario:</th>
                                             <td>
                                                 <select id="horario" name="horario" class="form-control form-control-sm" required>
-                                                    <option value="" selected>Seleccione un Horario</option>
+                                                    <option value="" selected>Seleccione un horario</option>
                                                 </select>
                                             </td>
                                         </tr>
@@ -278,7 +285,7 @@
                                         </tbody>
 
                                     </table>
-                                    <button type="submit" class="btn btn-info">Actualizar</button>
+                                    <button type="submit" class="btn btn-info btn-sm">Actualizar</button>
                                 </form>
                                 <?php
                             }
@@ -286,12 +293,11 @@
                         </div>
                     </div>
                 </div>
-                    <?php
-                } ?>
+                    <?php } ?>
             </div><!-- /.card -->
         </div>
     </div>
-</div>
+
         <div class="modal fade" id="addsection" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -309,11 +315,11 @@
                             <div class="form-group">
                                 <?php
                                 if($_SESSION['tutoria'] ['modality']==0){ ?>
-                                    <select id="section" name="section" class="form-control form-control-sm" required>
-                                        <option value="" selected>Seleccionar una seccion</option>
+                                    <select id="section" name="section" class="form-control form-control-sm" onchange="idsection()" required>
+                                        <option value="" selected>Seleccionar una sección</option>
                                         <?php
                                             foreach ($_SESSION['sections'] as $section){ ?>
-                                                <option><?= $section['description'] ?></option>
+                                                <option><?= $section['description']?></option>
                                                 <?php
                                             }
                                         ?>
@@ -340,7 +346,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Cancelacion/Denegacion de solicitud</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Cancelación/Denegación de solicitud</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -351,7 +357,7 @@
                             <input type="hidden" id="coordinator" name="coordinator" value="<?=$_SESSION['id']?>">
                             <input type="hidden" id="action" name="action" value="3"><!-- desaprobacion -->
                             <div class="form-group">
-                                <label for="section">Razon de cancelacion: </label>
+                                <label for="section">Razón de cancelación: </label>
                                     <input type="text" class="form-control" id="section" name="section" required>
                             </div>
                     </div>
@@ -363,6 +369,42 @@
                 </div>
             </div>
         </div>
+<!-- new period -->
+<div class="modal fade" id="newPeriod" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Actualizando periodo académico</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="<?=base_url.'tutorials/setPeriod'?>" method="POST">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="starperiod">Fecha Inicial: </label>
+                            <input type="date" class="form-control form-control-sm" id="starperiod" name="starperiod" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="finishperiod">Fecha final: </label>
+                            <input type="date" class="form-control form-control-sm" id="finishperiod" name="finishperiod"  required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="period_description">Descripción :</label>
+                        <input type="text" class="form-control form-control-sm" id="period_description" name="period_description"  required>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
     <!-- /.row -->
 <script>
     $(document).ready(function () {

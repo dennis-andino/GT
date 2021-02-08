@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Tutorias</h1>
+                    <h1 class="m-0 text-dark">Tutorías</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                        <li class="breadcrumb-item active">Tutorias</li>
+                        <li class="breadcrumb-item active">Tutorías</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -22,13 +22,17 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- /.col-md-6 -->
-                <div class="col">
+                <?php if(!isset($_SESSION['tutoria'])): ?>
+                <div class="col-12">
+                    <?php else:?>
+                    <div class="col-7">
+                        <?php endif;?>
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Tutorias Asignadas</h5>
+                            <h5 class="m-0">Tutorías asignadas</h5>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="maintable" class="table table-bordered table-hover">
+                            <table id="maintable" class="table table-bordered table-hover table-sm">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -61,10 +65,10 @@
                                                         </button>
                                                         <?php
                                                     } else if ($onetutorial->status == 1) { ?> <!-- aprobada/programada -->
-                                                        <button name="action" value="getinfo" type="submit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoria Programada."><i class="far fa-clock"></i></button>
+                                                        <button name="action" value="getinfo" type="submit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoría Programada."><i class="far fa-clock"></i></button>
                                                         <?php
                                                     } else { ?> <!-- finalizada -->
-                                                        <button name="action" value="getinfo" type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoria Finalizada."><i class="fas fa-check-double"></i></button>
+                                                        <button name="action" value="getinfo" type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Tutoría Finalizada."><i class="fas fa-check-double"></i></button>
                                                         <?php
                                                     }
                                                     ?>
@@ -83,7 +87,7 @@
                 <!-- /.col-md-6 -->
                 <?php
                 if (isset($_SESSION['form']) && $_SESSION['form'] == true) { ?>
-                    <div class="col-lg-5">
+                    <div class="col-md-5">
                         <div class="card card-primary">
                             <div class="card-header text-left">
                                 <h5 class="m-0">Solicitud &nbsp;#<?= $_SESSION['tutoria']['id'] ?>
@@ -104,7 +108,7 @@
                                         if ($_SESSION['tutoria']['status'] == 1) {?>
                                             <form action="<?= base_url . 'tutorials/start' ?>" method="POST">
                                                 <input type="hidden" id="idtutorial" name="idtutorial" value="<?=$_SESSION['tutoria']['id']?>">
-                                                <button type="submit" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Iniciar Tutoria"><i class="fas fa-play"></i></button>
+                                                <button type="submit" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Iniciar tutoría"><i class="fas fa-play"></i></button>
                                             </form>
                                             <?php
                                         } elseif ($_SESSION['tutoria']['status'] == 0) { ?>
@@ -112,7 +116,7 @@
                                                 <input type="hidden" id="idtutorial" name="idtutorial" value="<?=$_SESSION['tutoria']['id']?>">
                                                 <button type="submit" class="btn btn-danger btn-sm"
                                                         data-toggle="tooltip" data-placement="top"
-                                                        title="Finalizar Tutoria"><i class="fas fa-stop-circle"></i>
+                                                        title="Finalizar tutoría"><i class="fas fa-stop-circle"></i>
                                                 </button>
                                             </form>
                                             <?php
@@ -149,7 +153,7 @@
                                             <td colspan="3"><?= $_SESSION['tutoria']['subject'] ?></td>
                                         </tr>
                                         <tr>
-                                                <th scope="row">Seccion:</th>
+                                                <th scope="row">Sección:</th>
                                                 <td colspan="3"><?php if ($_SESSION['tutoria']['modality'] == 0): ?>
                                                     <?= $_SESSION['tutoria']['space'] ?>
                                                 <?php else: ?>
@@ -158,7 +162,7 @@
                                                     </td>
                                                     </tr>
                                         <tr>
-                                            <th scope="row" colspan="4">Descripcion:</th>
+                                            <th scope="row" colspan="4">Descripción:</th>
                                         </tr>
                                         <tr>
                                             <td colspan="4">
@@ -182,14 +186,14 @@
                                         <thead>
                                         <tr>
                                             <th colspan="3">
-                                                <div align='center'><h6><strong>Lista de Asistentes</strong></h6>
+                                                <div align='center'><h6><strong>Lista de asistentes</strong></h6>
                                                 </div>
                                             </th>
                                         </tr>
                                         <tr>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Telefono</th>
-                                            <th scope="col">asistencia</th>
+                                            <th scope="col">Asistencia</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -213,7 +217,7 @@
                                     </table>
                                     <?php
                                     if ($_SESSION['tutoria']['status'] == 0) { ?>
-                                        <button class="btn btn-info" type="submit">Enviar Asistencia</button>
+                                        <button class="btn btn-info" type="submit">Enviar asistencia</button>
                                         <?php
                                     }
                                     ?>

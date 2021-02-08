@@ -1,6 +1,11 @@
 <?php
+/*
+ * Desarrollado por : DennisM.Andino
+ * Contactame a mi correo : dennis_andino@outlook.com
+ * mi canal de Youtube: CodigoCompartido
+ * proyecto disponible en : https://github.com/dennis-andino/GT
+*/
 require_once 'models/User.php';
-
 
 class homeController
 {
@@ -33,6 +38,7 @@ class homeController
                 $_SESSION['jointutoring'] = $infouser->jointutoring;
                 $_SESSION['institution'] = $infouser->institution;
                 $_SESSION['logo'] = $infouser->logo;
+                $_SESSION['periodo']='Periodo 1er 2021';
                 $_SESSION['ip'] = Utils::getIpClient();
                 require_once 'models/Notifications.php';
                 $notification= new Notifications();
@@ -123,7 +129,6 @@ class homeController
             }
         }catch (Exception $e){
             $_SESSION['panel']='errorInk';
-            //$_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al procesar la informacion, intentalo de nuevo !", "type" => "error");
         } finally {
             if(isset($_POST)){
                 unset($_POST);
@@ -176,6 +181,14 @@ class homeController
 
     public static function logout()
     {
+        if($_SESSION['baseon']=='Tutor'){
+            if(isset($_SESSION['tutoria']) && $_SESSION['tutoria']['status'] == 0){
+                $_SESSION['alert'] = array("title" => "Tutoría no finalizada", "msj" => "Finalice la tutoría para cerrar la sesión!", "type" => "warning");
+                homeController::tutor();
+                exit();
+            }
+        }
+
         if (isset($_SESSION)) {
             unset($_SESSION['id']);
             $_SESSION = array();

@@ -24,14 +24,14 @@
                 <div class="col-lg-9">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Programacion de Horarios por tutor y asignatura</h5>
+                            <h5 class="m-0">Programación de Horarios por tutor y asignatura</h5>
                         </div>
                         <div class="card-header" style="background-color: #FBFCFC !important;">
                             <form action="<?=base_url.'schedule/createScheBytut'?>" method="POST">
                                 <div class="row">
                                     <div class="form-group col-2">
                                         <select class="form-control form-control-sm" style="background: #EBEDEF;" id="horas" name="horas" required>
-                                            <option value="" selected>Seleccionar Horario</option>
+                                            <option value="" selected>Seleccionar horario</option>
                                             <?php
                                             $schedules = $_SESSION['schedules'];
                                             foreach($schedules as $schedule){ ?>
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="form-group col-2">
                                         <select class="form-control form-control-sm" style="background: #EBEDEF;" id="courses" name="courses" required>
-                                            <option value="" selected>Seleccionar Asignatura</option>
+                                            <option value="" selected>Seleccionar asignatura</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-2">
@@ -74,7 +74,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-2">
-                                        <button type="submit" class="btn btn-primary btn-sm">Agregar programacion</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Agregar programación</button>
                                     </div>
 
                                 </div>
@@ -88,7 +88,7 @@
                                     <th>Horario</th>
                                     <th>Asignatura</th>
                                     <th>Tutor</th>
-                                    <th>acciones</th>
+                                    <th>Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -108,14 +108,14 @@
                                                 <button type="submit" name="action" value="0" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Deshabilitar Horario"><i class="fas fa-times-circle"></i></button>
                                                     <?php
                                             }else{?>
-                                                <button type="submit" name="action" value="1"  class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Habilitar Horario"><i class="fas fa-check-circle"></i></button>
+                                                <button type="submit" name="action" value="1"  class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Habilitar horario"><i class="fas fa-check-circle"></i></button>
                                                     <?php
                                             }
                                             ?>
                                         </form>
                                         <form action="<?=base_url.'schedule/deleteScheByTut'?>" method="POST" style="display: inline-block;">
                                             <input type="hidden" id="idschedelete" name="idschedelete" value="<?=$sched->id?>">
-                                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar Horario"><i class="fas fa-trash-alt"></i></button>
+                                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar horario"><i class="fas fa-trash-alt"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -143,9 +143,9 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Hora Inicial</th>
+                                    <th>Hora inicial</th>
                                     <th>Hora final</th>
-                                    <th>acciones</th>
+                                    <th>Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -161,12 +161,12 @@
                                         if($schedule['availability']==1){ ?>
                                         <form action="<?=base_url.'schedule/activateSched'?>" method="POST" style="display: inline-block;">
                                             <input type="hidden" id="idsched" name="idsched" value="<?=$schedule['id']?>">
-                                            <button type="submit"  name="action" value="0" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deshabilitar Horario"><i class="fas fa-times-circle"></i></button>
+                                            <button type="submit"  name="action" value="0" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deshabilitar horario"><i class="fas fa-times-circle"></i></button>
                                         </form>
                                             <?php }else{ ?>
                                         <form action="<?=base_url.'schedule/activateSched'?>" method="POST" style="display: inline-block;">
                                             <input type="hidden" id="idsched" name="idsched" value="<?=$schedule['id']?>">
-                                            <button type="submit"  name="action" value="1"  class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Habilitar Horario"><i class="fas fa-check-circle"></i></button>
+                                            <button type="submit"  name="action" value="1"  class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Habilitar horario"><i class="fas fa-check-circle"></i></button>
                                         </form>
                                         <?php
                                         }
@@ -198,7 +198,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Nuevo Horario</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Nuevo horario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -207,11 +207,11 @@
                 <form action="<?=base_url.'schedule/create'?>" method="POST">
                     <div class="row">
                     <div class="form-group col-6">
-                        <label for="starttime">Hora Inicial (24H)</label>
+                        <label for="starttime">Hora inicial (24H)</label>
                         <input type="time" class="form-control" id="starttime" name="starttime" required>
                     </div>
                     <div class="form-group col-6">
-                        <label for="finishtime">Hora Final (24H)</label>
+                        <label for="finishtime">Hora final (24H)</label>
                         <input type="time" class="form-control" id="finishtime" name="finishtime"  required>
                     </div>
                     </div>

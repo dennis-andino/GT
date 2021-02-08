@@ -52,7 +52,7 @@ class Sections
 
     public function getAllEnables()
     {
-        return $this->connection->query('SELECT description FROM sections WHERE availability=1;');
+        return $this->connection->query('SELECT id,description FROM sections WHERE availability=1;');
     }
 
     public function getAll()

@@ -1,4 +1,10 @@
 <?php
+/*
+ * Desarrollado por : DennisM.Andino
+ * Contactame a mi correo : dennis_andino@outlook.com
+ * mi canal de Youtube: CodigoCompartido
+ * proyecto disponible en : https://github.com/dennis-andino/GT
+*/
 require_once 'models/Tutorials.php';
 require_once 'models/Courses.php';
 
@@ -46,7 +52,7 @@ class tutorialsController
 
     public function save()
     {
-        try{
+        try {
             if (isset($_POST['subject']) && isset($_POST['details'])) {
                 $requestdate = date('Y-m-d g:ia');
                 $new_tutoria = new Tutorials();
@@ -91,13 +97,13 @@ class tutorialsController
                         $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al procesar la solicitud, intentalo de nuevo !", "type" => "error");
                     }
                 }
-            }else{
+            } else {
                 $_SESSION['alert'] = array("title" => "Informacion incompleta ", "msj" => "Experimentamos problemas al procesar la solicitud, asegurese de llenar todos los campos requeridos !", "type" => "error");
             }
-        }catch (Exception $e){
+        } catch (Exception $e) {
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas tecnicos , intentalo de nuevo !", "type" => "error");
         } finally {
-            header('Location:'.base_url.'home/student');
+            header('Location:' . base_url . 'home/student');
         }
 
 
@@ -120,9 +126,9 @@ class tutorialsController
                     $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al obtener la informacion, intentalo de nuevo !", "type" => "error");
                 }
                 if ($_SESSION['baseon'] == 'Tutor') {
-                    header('Location:'.base_url.'home/tutor');
+                    header('Location:' . base_url . 'home/tutor');
                 } elseif ($_SESSION['baseon'] == 'Coordinator') {
-                    if (($_SESSION['tutoria']['status'] == -1 || $_SESSION['tutoria']['status'] == 1) && !isset($_SESSION['asignatures'])) {
+                    if (($_SESSION['tutoria']['status'] == -1 || $_SESSION['tutoria']['status'] == 1)) {
                         require_once 'models/Courses.php';
                         $courses_object = new Courses();
                         $_SESSION['asignatures'] = $courses_object->getCoursesByTutorial((int)$_SESSION['tutoria']['id'])->fetch_all(MYSQLI_ASSOC);
@@ -132,9 +138,9 @@ class tutorialsController
                             $_SESSION['sections'] = $sectionObject->getAllEnables()->fetch_all(MYSQLI_ASSOC);
                         }
                     }
-                    header('Location:'.base_url.'home/coordinator');
+                    header('Location:' . base_url . 'home/coordinator');
                 } else {
-                   homeController::logout();
+                    homeController::logout();
                 }
 
             }
@@ -158,7 +164,7 @@ class tutorialsController
             }
         }
         //homeController::student();
-        header('Location:'.base_url.'home/student');
+        header('Location:' . base_url . 'home/student');
     }
 
     public function historicStudent()
@@ -183,23 +189,34 @@ class tutorialsController
         try {
             if (isset($_POST['idtutorial']) && isset($_POST['coordinator']) && isset($_POST['action'])) {
                 $tutoria = new Tutorials();
-                $tutoria->setId((int)$_POST['idtutorial']);
-                $tutoria->setApprovedby((int)$_POST['coordinator']);
-                $tutoria->setSpace($_POST['section']); //seccion, aula virtual o cancelacion
-                if ($_POST['action'] == 1) {
-                    $tutoria->setStatus(1);//aprobacion
-                } else {
-                    $tutoria->setStatus(3);//cancelacion
-                }
-                $answerserver = $tutoria->approve()->fetch_object();
-                if ($answerserver->result == '0') {// la aprobacion tuvo exito
+                $schedule=trim($_SESSION['tutoria']['schedule']);
+                $reservdate=trim($_SESSION['tutoria']['reservdate']);
+                $section=trim($_POST['section']);
+                $validateSecction=$tutoria->validateSectionState($schedule,$reservdate,$section);
+                if(mysqli_num_rows($validateSecction)>0){
+                    $reserva=$validateSecction->fetch_object();
+
+                    $_SESSION['alert'] = array("title" => "Seccion no disponible", "msj" => "La sección seleccionada esta reservada para la solicitud #{$reserva->id} ,en el mismo horario.", "type" => "error");
+                }else{
+                    $tutoria->setId((int)$_POST['idtutorial']);
+                    $tutoria->setApprovedby((int)$_POST['coordinator']);
+                    $tutoria->setSpace($_POST['section']); //seccion, aula virtual o cancelacion
+
                     if ($_POST['action'] == 1) {
-                        $_SESSION['alert'] = array("title" => "Solicitud aprobada", "msj" => "Se ha aprobado la solicitud satisfactoriamente.", "type" => "success");
+                        $tutoria->setStatus(1);//aprobacion
                     } else {
-                        $_SESSION['alert'] = array("title" => "Solicitud Cancelada", "msj" => "La solicitud se ha cancelado.", "type" => "warning");
+                        $tutoria->setStatus(3);//cancelacion
                     }
-                } else {
-                    $_SESSION['alert'] = array("title" => "Upps :(", "msj" => "tuvimos problemas al intentar cambiar el estado de la solicitud, intentalo nuevamente .", "type" => "error");
+                    $answerserver = $tutoria->approve()->fetch_object();
+                    if ($answerserver->result == '0') {// la aprobacion tuvo exito
+                        if ($_POST['action'] == 1) {
+                            $_SESSION['alert'] = array("title" => "Solicitud aprobada", "msj" => "Se ha aprobado la solicitud satisfactoriamente.", "type" => "success");
+                        } else {
+                            $_SESSION['alert'] = array("title" => "Solicitud Cancelada", "msj" => "La solicitud se ha cancelado.", "type" => "warning");
+                        }
+                    } else {
+                        $_SESSION['alert'] = array("title" => "Upps :(", "msj" => "tuvimos problemas al intentar cambiar el estado de la solicitud, intentalo nuevamente .", "type" => "error");
+                    }
                 }
             }
         } catch (Exception $e) {
@@ -218,13 +235,22 @@ class tutorialsController
                 $tutoria->setSchedule((int)$_POST['horario']);
                 $tutoria->setReservdate($_POST['reserva']);
                 $tutoria->setSpace($_POST['sect_edit']);
-                $answerserver = $tutoria->reconfigure();
-                $answerserver = $answerserver->fetch_object();
-                if ($answerserver && $answerserver->result == 0) {
-                    $_SESSION['alert'] = array("title" => "Solicitud actualizada", "msj" => "Se actualizo satisfactoriamente la solicitud.", "type" => "success");
-                } else {
-                    $_SESSION['alert'] = array("title" => "Upps :(", "msj" => "tuvimos problemas al intentar actualizar el estado de la solicitud, intentalo nuevamente .", "type" => "error");
+                $schedule=$tutoria->getSchedulebyId()->fetch_object()->schedule;
+                $reservdate=trim($_POST['reserva']);
+                $section=trim($_POST['sect_edit']);
+                $validateSecction=$tutoria->validateSectionState($schedule,$reservdate,$section);
+                if(mysqli_num_rows($validateSecction)>0){
+                    $_SESSION['alert'] = array("title" => "Seccion no disponible", "msj" => "La sección seleccionada no esta disponible en el horario seleccionado.", "type" => "error");
+                }else{
+                    $answerserver = $tutoria->reconfigure();
+                    $answerserver = $answerserver->fetch_object();
+                    if ($answerserver && $answerserver->result == 0) {
+                        $_SESSION['alert'] = array("title" => "Solicitud actualizada", "msj" => "Se actualizo satisfactoriamente la solicitud.", "type" => "success");
+                    } else {
+                        $_SESSION['alert'] = array("title" => "Upps :(", "msj" => "tuvimos problemas al intentar actualizar el estado de la solicitud, intentalo nuevamente .", "type" => "error");
+                    }
                 }
+
             } else {
                 $_SESSION['alert'] = array("title" => "Upps :(", "msj" => "tuvimos problemas al procesar la solicitud, verifica la informacion prpoprcionada e intentalo nuevamente .", "type" => "error");
             }
@@ -296,7 +322,7 @@ class tutorialsController
             $_SESSION['alert'] = array("title" => "Upps :( ", "msj" => "Experimentamos problemas al intentar iniciar la tutoria, intentalo de nuevo !", "type" => "error");
         } finally {
             //homeController::tutor();
-            header('Location:'.base_url.'home/tutor');
+            header('Location:' . base_url . 'home/tutor');
         }
 
 
@@ -312,7 +338,7 @@ class tutorialsController
                 $_SESSION['alert'] = array("title" => "Tutoria finalizada", "msj" => "La tutoria se ha finalizado satisfactoriamente.", "type" => "warning");
             }
         }
-        header('Location:'.base_url.'home/tutor');
+        header('Location:' . base_url . 'home/tutor');
     }
 
     public function tutorEvaluations()
@@ -354,9 +380,24 @@ class tutorialsController
             $_SESSION['panel'] = 'errorInk';
         } finally {
             //self::historicStudent();
-            header('Location:'.base_url.'tutorials/historicStudent');
+            header('Location:' . base_url . 'tutorials/historicStudent');
         }
 
+
+    }
+
+    public function setPeriod()
+    {
+        try {
+            if (isset($_POST['period_description'])) {
+                $_SESSION['periodo'] = $_POST['period_description'];
+                $_SESSION['alert'] = array("title" => "Periodo actualizado", "msj" => "Se actualizo la informacion exitosamente !", "type" => "success");
+            }
+        } catch (Exception $e) {
+            $_SESSION['alert'] = array("title" => "Upps !!", "msj" => " Experimentamos problemas al procesar la informacion, estamos trabajando para resolverlo.", "type" => "error");
+        } finally {
+            header('Location:' . base_url . 'home/coordinator');
+        }
 
     }
 

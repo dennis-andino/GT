@@ -10,7 +10,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
     <?php
     require_once 'core/librerias.php';
     ?>
-    <title>Gestion de tutorias</title>
+    <title>Gestión de tutorías</title>
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse" onload="noback();">
 <div class="wrapper">
@@ -47,7 +47,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                         }
                     }
                     ?>
-                    <a href="<?=base_url.'notification/seeNotifications'?>" class="dropdown-item dropdown-footer">Ver Todas</a>
+                    <a href="<?=base_url.'notification/seeNotifications'?>" class="dropdown-item dropdown-footer">Ver todas</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -88,7 +88,7 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                         <a href="<?= base_url . 'home/Tutor' ?>" class="nav-link">
                             <i class="nav-icon fas fa-chalkboard-teacher"></i>
                             <p>
-                                Tutorias
+                                Tutorías
                             </p>
                         </a>
                     </li>
@@ -120,14 +120,14 @@ Utils::sessionOff(); // verifica si existe una sesion valida.
                         <a href="<?=base_url.'users/myAccountInfo'?>" class="nav-link">
                             <i class="nav-icon far fa-address-card"></i>
                             <p>
-                                Mi Cuenta
+                                Mi cuenta
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url . 'institution/index'?>" class="nav-link">
                             <i class="nav-icon fas fa-university"></i>
-                            <p> Mi Institucion</p>
+                            <p> Mi institución</p>
                         </a>
                     </li>
             </nav>

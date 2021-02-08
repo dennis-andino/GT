@@ -9,7 +9,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                        <li class="breadcrumb-item active">Bitacora</li>
+                        <li class="breadcrumb-item active">Bitácora</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -25,7 +25,7 @@
                 <div class="col">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0">Bitacora</h5>
+                            <h5 class="m-0">Bitácora</h5>
                         </div>
                         <div class="card-body table-responsive">
                             <table id="maintable" class="table table-bordered table-hover">
@@ -37,7 +37,7 @@
                                     <th>Tipo</th>
                                     <th>usuario</th>
                                     <th>IP</th>
-                                    <th>Descripcion</th>
+                                    <th>Descripción</th>
                                 </tr>
                                 </thead>
                                 <tbody>

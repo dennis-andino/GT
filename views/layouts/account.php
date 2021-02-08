@@ -56,7 +56,7 @@
                             <tr>
                                 <th scope="row">Nombre:</th>
                                 <td colspan="2"><?=$user->fullname?></td>
-                                <th scope="row">Fecha de Nacimiento: <i class="fas fa-pencil-alt prefix"></i></th>
+                                <th scope="row">Fecha de nacimiento: <i class="fas fa-pencil-alt prefix"></i></th>
                                 <td><input type="date" value="<?=$user->birthDate?>" class="form-control outlinenone sinborde" name="birthday"></td>
                             </tr>
                             <tr>
@@ -72,9 +72,9 @@
                                 <td><?=$user->campus?></td>
                             </tr>
                             <tr>
-                                <th scope="row">Ingreso a la Institucion: </th>
+                                <th scope="row">Ingreso a la institución: </th>
                                 <td><?=$user->admissionDate?></td>
-                                <th scope="row" colspan="2">Cuenta Institucional: </th>
+                                <th scope="row" colspan="2">Cuenta institucional: </th>
                                 <td><?=$user->account?></td>
                             </tr>
                             <tr>
@@ -90,7 +90,7 @@
                                 <td><?=$user->availability==1?'Activo':'Inhabilitado'?></td>
                             </tr>
                             <tr>
-                                <th scope="row">Biografia: <i class="fas fa-pencil-alt prefix"></i></th>
+                                <th scope="row">Biografía: <i class="fas fa-pencil-alt prefix"></i></th>
                                 <td colspan="4"><input type="text" value="<?=$user->observations?>" name="biografy" class="form-control outlinenone"></td>
                             </tr>
                             <tr>
